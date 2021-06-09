@@ -20,7 +20,7 @@ export default {
     return {
       scale: 0,
       // width: 1920,
-      // height: 937
+      // height: 1080
       width: 3520,
       height: 1996
     }

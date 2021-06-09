@@ -41,6 +41,7 @@ export default {
   height: 646px;
   width: 856px;
   background-color: #0c1427;
+  border: solid 3px #4c5c9a;
   // padding: 5px 14px 0;
   .content {
     width: 100%;
@@ -50,15 +51,15 @@ export default {
       width: 100%;
       height: 100px;
       line-height: 100px;
-      border-top: 1px solid #4c5c9a;
+      // border-top: 1px solid #4c5c9a;
       span {
         display: inline-block;
         width: 49%;
         text-align: center;
-        border-right: 1px solid #4c5c9a;
+        // border-right: 1px solid #4c5c9a;
       }
       .span2 {
-        border-right: none;
+        // border-right: none;
       }
     }
   }

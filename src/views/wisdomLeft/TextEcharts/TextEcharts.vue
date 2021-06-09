@@ -8,7 +8,7 @@
           ref="chartManageBar"
         ></wisdom-echarts-frame>
       </div>
-      <div class="lengend">
+      <!-- <div class="lengend">
         <div class="top-item">
           <span class="lengend-border"></span>
           <span class="text" style="margin-right:29px">黄牌流量</span>
@@ -19,7 +19,7 @@
           <span class="text" style="margin-right:29px">绿牌流量</span>
           <span class="text">44725</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -53,37 +53,37 @@ export default {
     width: 100%;
     height: 230px;
     .echarts {
-      width: 60%;
+      width: 100%;
       height: 100%;
     }
-    .lengend {
-      color: #fff;
-      width: 40%;
-      height: 100%;
-      .top-item {
-        display: flex;
-        margin-bottom: 40px;
-        .lengend-border {
-          display: inline-block;
-          width: 35px;
-          height: 35px;
-          background: #b5954a;
-          margin-right: 29px;
-          border-radius: 5px;
-        }
-        .text {
-          font-family: AdobeHeitiStd-Regular;
-          font-size: 33px;
-          font-weight: normal;
-          color: #ffffff;
-        }
-      }
-      .bottom-item {
-        .lengend-border {
-          background-color: #2b62bf;
-        }
-      }
-    }
+    // .lengend {
+    //   color: #fff;
+    //   width: 40%;
+    //   height: 100%;
+    //   .top-item {
+    //     display: flex;
+    //     margin-bottom: 40px;
+    //     .lengend-border {
+    //       display: inline-block;
+    //       width: 35px;
+    //       height: 35px;
+    //       background: #b5954a;
+    //       margin-right: 29px;
+    //       border-radius: 5px;
+    //     }
+    //     .text {
+    //       font-family: AdobeHeitiStd-Regular;
+    //       font-size: 33px;
+    //       font-weight: normal;
+    //       color: #ffffff;
+    //     }
+    //   }
+    //   .bottom-item {
+    //     .lengend-border {
+    //       background-color: #2b62bf;
+    //     }
+    //   }
+    // }
   }
 }
 </style>

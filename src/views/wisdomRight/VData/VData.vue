@@ -39,7 +39,7 @@ export default {
   background-color: #0c1427;
   padding: 5px 14px 0;
   border: solid 3px #4c5c9a;
-  margin-top: 20px;
+  margin-top: 100px;
   .content {
     width: 100%;
     color: #fff;

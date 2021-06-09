@@ -48,6 +48,7 @@ export default {
   padding: 5px 14px 0;
   position: relative;
   color: #fff;
+  margin-top: 150px;
   .content {
     display: flex;
     width: 100%;
