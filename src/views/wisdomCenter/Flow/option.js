@@ -50,7 +50,7 @@ export function chartOptionPie() {
         // show: true,
         textStyle: {
           color: '#fff',
-          fontSize: 20
+          fontSize: 14
         }
       },
       axisLine: {
@@ -69,7 +69,7 @@ export function chartOptionPie() {
       axisLabel: {
         textStyle: {
           color: '#fff',
-          fontSize: 20
+          fontSize: 14
         }
       },
       axisLine: {
@@ -166,7 +166,7 @@ export function chartOptionPie2() {
         // show: true,
         textStyle: {
           color: '#fff',
-          fontSize: 20
+          fontSize: 14
         }
       },
       axisLine: {
@@ -185,7 +185,7 @@ export function chartOptionPie2() {
       axisLabel: {
         textStyle: {
           color: '#fff',
-          fontSize: 20
+          fontSize: 14
         }
       },
       axisLine: {

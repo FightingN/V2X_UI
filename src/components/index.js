@@ -15,3 +15,7 @@ components.keys().forEach(filename => {
   // 注册
   Vue.component(componentName, componentConfig)
 })
+//引入项目中所有的svg文件
+const requireAll = requireContext => requireContext.keys().map(requireContext)
+const req = require.context('./svg-icon/svg', false, /\.svg$/)
+requireAll(req)

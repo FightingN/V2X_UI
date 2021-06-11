@@ -4,7 +4,7 @@
     <div class="content">
       <div class="item item-title">
         <span>路段名称</span>
-        <span class="span2" style="margin-left:200px">服务水平</span>
+        <span class="span2">服务水平</span>
       </div>
       <div class="item">
         <span>G92_红垦枢纽-机场互通_杭州方向</span>
@@ -34,32 +34,35 @@ export default {
 <style lang="scss" scoped>
 .v-data {
   box-sizing: border-box;
-  height: 412px;
-  width: 800px;
+  height: 20%;
+  width: 100%;
   background-color: #0c1427;
-  padding: 5px 14px 0;
-  border: solid 3px #4c5c9a;
-  margin-top: 100px;
+  padding: 0.0625rem;
+  border: solid 1px #4c5c9a;
+  margin-top: 0.25rem;
   .content {
     width: 100%;
+    height: 85%;
     color: #fff;
-    font-size: 32px;
+    font-size: 0.15rem;
     .item {
       width: 100%;
-      height: 60px;
+      height: 25%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      text-align: center;
       span {
+        flex: 1;
         display: inline-block;
         text-align: center;
-      }
-      .span2 {
-        margin-left: 110px;
       }
     }
     .item-title {
       text-align: center;
       background: rgba(21, 33, 77, 0.6);
       color: #3c7ca9;
-      font-size: 38px;
+      font-size: 0.2rem;
     }
   }
 }

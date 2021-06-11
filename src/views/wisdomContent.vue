@@ -29,9 +29,9 @@ export default {
 .wisdom-content {
   box-sizing: border-box;
   width: 100%;
-  height: calc(100% - 66px);
+  height: calc(100% - 0.875rem);
   position: relative;
   display: flex;
-  padding: 20px;
+  padding: 0.125rem;
 }
 </style>

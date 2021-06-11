@@ -192,7 +192,7 @@ export function chartOptionPie() {
       text: '可吸入颗粒排放量',
       textStyle: {
         color: '#FFF',
-        fontSize: 34,
+        fontSize: 16,
         fontWeight: 'bold'
       },
       left: 'center',
@@ -242,7 +242,7 @@ export function chartOptionPie() {
                 position: 'center',
                 show: true,
                 textStyle: {
-                  fontSize: '60',
+                  fontSize: '16',
                   fontWeight: 'normal',
                   color: '#fff'
                 }
@@ -287,7 +287,7 @@ export function chartOptionPie2() {
       text: '氮氧化物排放量',
       textStyle: {
         color: '#FFF',
-        fontSize: 34,
+        fontSize: 16,
         fontWeight: 'bold'
       },
       left: 'center',
@@ -337,7 +337,7 @@ export function chartOptionPie2() {
                 position: 'center',
                 show: true,
                 textStyle: {
-                  fontSize: '60',
+                  fontSize: '16',
                   fontWeight: 'normal',
                   color: '#fff'
                 }

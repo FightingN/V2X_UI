@@ -6,7 +6,8 @@
   >
     <div class="screen-dropdown-menu-frame" @click="onVisibleChange">
       <div class="select-label">{{ selectedLabel }}</div>
-      <svg-icon icon-class="bottom-sword" fill="#606266"> </svg-icon>
+      <!-- <svg-icon icon-class="bottom-sword" fill="#fff"> </svg-icon> -->
+      <div class="icon"></div>
     </div>
     <div
       class="screen-dropdown-menu-list"
@@ -36,7 +37,7 @@
           {{ item.label }}
         </div>
       </div>
-      <div class="screen-dropdown-menu-list-arrow"></div>
+      <!-- <div class="screen-dropdown-menu-list-arrow"></div> -->
     </div>
   </div>
 </template>
@@ -180,7 +181,7 @@ export default {
     box-sizing: border-box;
     width: 100%;
     height: 100%;
-    border: 1px solid #03327e;
+    border: 1px solid #4c5c9a;
     border-radius: 3px;
     // color: #606266;
     color: #2bccff;
@@ -252,6 +253,13 @@ export default {
       border: 6px solid transparent;
       border-bottom: 6px solid #fff;
     }
+  }
+  .icon {
+    width: 0;
+    height: 0;
+    border-right: 8px solid transparent;
+    border-left: 8px solid transparent;
+    border-top: 8px solid #eee;
   }
 }
 </style>

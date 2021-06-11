@@ -25,11 +25,15 @@
 
 <script>
 import { chartOptionPie, chartOptionPie2 } from './option.js'
+import { debounce } from 'utils/common'
 
 export default {
   name: 'Flow',
   data () {
     return {}
+  },
+  mounted () {
+    window.addEventListener('resize', debounce(this.resizeEcharts))
   },
   methods: {
     chartManageBarMethod (myChart) {
@@ -38,9 +42,17 @@ export default {
       this.myChartBar.setOption(chartOptionPie())
     },
     chartManageBarMethod2 (myChart) {
-      this.myChartBar = myChart
+      this.myChartBar2 = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie2())
+      this.myChartBar2.setOption(chartOptionPie2())
+    },
+    resizeEcharts () {
+      if (this.myChartBar) {
+        this.myChartBar.resize()
+      }
+      if (this.myChartBar2) {
+        this.myChartBar2.resize()
+      }
     }
   }
 }
@@ -48,23 +60,23 @@ export default {
 <style lang="scss" scoped>
 .flow {
   box-sizing: border-box;
-  width: 1783px;
-  height: 349px;
+  width: 100%;
+  height: 28%;
   background-color: #0c1427;
-  border: solid 3px #4c5c9a;
-  padding: 5px 14px 0;
+  border: solid 1px #4c5c9a;
+  padding: 0.0625rem;
   position: absolute;
-  bottom: 10px;
+  bottom: 0%;
   .echarts {
     width: 100%;
-    height: 350px;
+    height: 100%;
     display: flex;
     .div {
       width: 50%;
       height: 100%;
       .title {
         color: #fff;
-        font-size: 24px;
+        font-size: 0.175rem;
         text-align: center;
       }
     }

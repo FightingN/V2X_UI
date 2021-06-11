@@ -11,7 +11,7 @@ export function chartOptionPie() {
       textStyle: {
         //图例文字的样式
         color: '#fff',
-        fontSize: 36
+        fontSize: 16
       }
     },
     color: ['#2b62bf', '#b5954a', '#419aee'],
@@ -20,7 +20,7 @@ export function chartOptionPie() {
         name: '交通流量',
         type: 'pie',
         radius: ['40%', '75%'],
-        center: ['30%', '40%'],
+        center: ['30%', '50%'],
         avoidLabelOverlap: false,
         label: {
           show: false,
@@ -29,7 +29,7 @@ export function chartOptionPie() {
         emphasis: {
           label: {
             show: false,
-            fontSize: '40',
+            fontSize: '20',
             fontWeight: 'bold'
           }
         },

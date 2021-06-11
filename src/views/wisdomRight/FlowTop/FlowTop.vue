@@ -9,7 +9,7 @@
         ></wisdom-echarts-frame>
       </div>
     </div>
-    <div class="echarts-title1">
+    <!-- <div class="echarts-title1">
       G92_红垦枢纽_机场互通_宁波方向 &nbsp;&nbsp;&nbsp;&nbsp;合计3400
     </div>
     <div class="echarts-title2">
@@ -17,23 +17,32 @@
     </div>
     <div class="echarts-title3">
       G92_红垦枢纽_机场互通_宁波方向 &nbsp;&nbsp;&nbsp;&nbsp;合计2431
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 import { chartOptionPie } from './option.js'
+import { debounce } from 'utils/common'
 
 export default {
   name: 'FlowTop',
   data () {
     return {}
   },
+  mounted () {
+    window.addEventListener('resize', debounce(this.resizeEcharts))
+  },
   methods: {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
       this.myChartBar.setOption(chartOptionPie())
+    },
+    resizeEcharts () {
+      if (this.myChartBar) {
+        this.myChartBar.resize()
+      }
     }
   }
 }
@@ -41,18 +50,19 @@ export default {
 <style lang="scss" scoped>
 .flow-top {
   box-sizing: border-box;
-  width: 800px;
-  height: 432px;
+  width: 100%;
+  height: 22%;
   background-color: #0c1427;
-  border: solid 3px #4c5c9a;
-  padding: 5px 14px 0;
+  border: solid 1px #4c5c9a;
+  padding: 0.0625rem;
   position: relative;
   color: #fff;
-  margin-top: 150px;
+  margin-top: 0.25rem;
   .content {
     display: flex;
     width: 100%;
-    height: 230px;
+    height: 85%;
+    margin-top: 0.125rem;
     .echarts {
       width: 100%;
       height: 100%;
@@ -61,20 +71,20 @@ export default {
   .echarts-title1 {
     position: absolute;
     left: 5%;
-    top: 30%;
-    font-size: 24px;
+    top: 12%;
+    font-size: 16px;
   }
   .echarts-title2 {
     position: absolute;
     left: 5%;
-    top: 45%;
-    font-size: 24px;
+    top: 35%;
+    font-size: 16px;
   }
   .echarts-title3 {
     position: absolute;
     left: 5%;
-    top: 60%;
-    font-size: 24px;
+    top: 56%;
+    font-size: 16px;
   }
 }
 </style>

@@ -30,25 +30,28 @@ export default {
 <style lang="scss" scoped>
 .v-data {
   box-sizing: border-box;
-  height: 320px;
-  width: 800px;
+  height: 26%;
+  width: 100%;
   background-color: #0c1427;
-  padding: 5px 14px 0;
-  border: solid 3px #4c5c9a;
-  margin-top: 100px;
+  padding: 0.0625rem;
+  border: solid 1px #4c5c9a;
+  margin-top: 0.25rem;
   .content {
     width: 100%;
+    height: 85%;
     color: #fff;
-    font-size: 24px;
+    font-size: 0.15rem;
     .item {
       width: 100%;
-      height: 60px;
+      height: 33%;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
       span {
         display: inline-block;
         text-align: center;
       }
       .span2 {
-        // margin-left: 110px;
         color: #dd8933;
       }
     }
@@ -56,7 +59,7 @@ export default {
       text-align: center;
       background: rgba(21, 33, 77, 0.6);
       color: #3c7ca9;
-      font-size: 38px;
+      font-size: 16px;
     }
   }
 }

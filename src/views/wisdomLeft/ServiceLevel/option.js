@@ -1,13 +1,13 @@
 export function chartOptionPie() {
-  var dataLine = [25, 33, 66]
-  var myColor = ['#1bbf9f', '#1bbf9f', '#1bbf9f']
+  var dataLine = [25, 33]
+  var myColor = ['#1960c6', '#bb953a']
   return {
     grid: [
       {
-        left: '18%',
-        top: '15%',
+        left: '20%',
+        top: '10%',
         right: '10%',
-        bottom: '15%'
+        bottom: '10%'
       }
     ],
     xAxis: [
@@ -30,7 +30,7 @@ export function chartOptionPie() {
             fontSize: 12
           }
         },
-        data: ['平均车头时距', '车辆平均速度', '大车混入率']
+        data: ['平均车速', '大车混入率']
       },
       {
         axisTick: 'none',
@@ -42,7 +42,7 @@ export function chartOptionPie() {
             fontSize: 16
           }
         },
-        data: [1, 1, 1]
+        data: [1, 1]
       },
       {
         axisLine: {
@@ -75,7 +75,7 @@ export function chartOptionPie() {
             }
           }
         },
-        barWidth: 25,
+        barWidth: 15,
         itemStyle: {
           normal: {
             color: function(params) {
@@ -91,11 +91,11 @@ export function chartOptionPie() {
         type: 'bar',
         yAxisIndex: 1,
         barGap: '-100%',
-        data: [100, 100, 100],
-        barWidth: 27,
+        data: [90, 90],
+        barWidth: 15,
         itemStyle: {
           normal: {
-            color: '#eee'
+            color: '#2e4364'
           }
         },
         z: 1,
@@ -103,14 +103,12 @@ export function chartOptionPie() {
           normal: {
             show: true,
             position: 'right',
-            distance: 8,
+            distance: 10,
             formatter: function(data) {
               if (data.dataIndex == 0) {
                 return dataLine[data.dataIndex] + 'm'
               } else if (data.dataIndex == 1) {
                 return dataLine[data.dataIndex] + 'km/h'
-              } else if (data.dataIndex == 2) {
-                return dataLine[data.dataIndex] + 's'
               }
             },
             textStyle: {

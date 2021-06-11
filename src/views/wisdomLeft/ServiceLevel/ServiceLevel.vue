@@ -5,91 +5,64 @@
       <span class="right">拥堵路段占比：10%</span>
     </div>
     <div class="content">
-      <div class="top">
-        <span class="speed">平均车速</span>
-        <div>
-          <span class="div1"></span>
-          <span class="div2"></span>
-        </div>
-        <span class="speed">106km/h</span>
-      </div>
-      <div class="top bottom">
-        <span class="speed">大车混入率</span>
-        <div>
-          <span class="div1"></span>
-          <span class="div2"></span>
-        </div>
-        <span class="speed">0.4</span>
-      </div>
+      <wisdom-echarts-frame
+        @myChartMethod="chartManageBarMethod"
+        ref="chartManageBar"
+      ></wisdom-echarts-frame>
     </div>
   </div>
 </template>
 
 <script>
+import { debounce } from 'utils/common'
+import { chartOptionPie } from './option.js'
+
 export default {
   name: 'ServiceLevel',
   data () {
     return {}
   },
-  methods: {}
+  mounted () {
+    window.addEventListener('resize', debounce(this.resizeEcharts))
+  },
+  methods: {
+    chartManageBarMethod (myChart) {
+      this.myChartBar = myChart
+      this.$refs.chartManageBar.clear()
+      this.myChartBar.setOption(chartOptionPie())
+    },
+    resizeEcharts () {
+      if (this.myChartBar) {
+        this.myChartBar.resize()
+      }
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .service-level {
   box-sizing: border-box;
-  width: 856px;
-  height: 257px;
+  width: 100%;
+  height: 20%;
   color: #fff;
   background-color: #0c1427;
-  border: solid 3px #4c5c9a;
-  padding: 5px 14px 0;
-  margin-top: 20px;
+  border: solid 1px #4c5c9a;
+  padding: 0.0625rem 0.0625rem 0;
+  margin-top: 0.125rem;
   .title {
-    margin-bottom: 20px;
+    margin-bottom: 0.125rem;
     span {
       font-family: AdobeHeitiStd-Regular;
-      font-size: 35px;
+      font-size: 0.25rem;
       font-weight: normal;
     }
     .right {
-      margin-left: 80px;
+      margin-left: 1rem;
     }
   }
   .content {
-    .top {
-      display: flex;
-      .speed {
-        font-size: 28px;
-      }
-      .div1 {
-        width: 450px;
-        height: 40px;
-        background: rgba(43, 98, 191, 0.1);
-        display: inline-block;
-        margin-left: 30px;
-        margin-right: 30px;
-        margin-top: 10px;
-        position: relative;
-      }
-      .div2 {
-        width: 350px;
-        height: 40px;
-        background: #2b62bf;
-        display: inline-block;
-        margin-left: 30px;
-        margin-right: 30px;
-        margin-top: 10px;
-        position: absolute;
-        left: 150px;
-      }
-    }
-    .bottom {
-      margin-top: 35px;
-      .div2 {
-        width: 200px;
-        background: #b5954a;
-      }
-    }
+    width: 100%;
+    height: 70%;
   }
 }
 </style>

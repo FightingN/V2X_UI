@@ -20,8 +20,10 @@ export default {
 <style lang="scss" scoped>
 .wisdom-center {
   box-sizing: border-box;
-  width: 85%;
+  width: 50%;
   height: 100%;
   z-index: 10;
+  margin-left: 0.125rem;
+  position: relative;
 }
 </style>

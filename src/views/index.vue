@@ -1,10 +1,10 @@
 <template>
-  <!-- <div class="wisdom-box"> -->
-  <scale-box>
+  <div class="wisdom-box">
+    <!-- <scale-box> -->
     <wisdom-header></wisdom-header>
     <wisdom-content></wisdom-content>
-  </scale-box>
-  <!-- </div> -->
+    <!-- </scale-box> -->
+  </div>
 </template>
 
 <script>
@@ -23,9 +23,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .wisdom-box {
-  // width: 100%;
-  // height: 100vh;
-  // border: 1px solid red;
-  // position: relative;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
 }
 </style>

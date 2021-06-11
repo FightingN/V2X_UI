@@ -1,8 +1,9 @@
 <template>
   <div class="wisdom-right">
-    <!-- <screen-dropdown-menu></screen-dropdown-menu> -->
-    <div class="search" @click="onChangeSearch">二级页面</div>
-    <search-input></search-input>
+    <screen-dropdown-menu
+      :menuList="menuList"
+      @onChooseItem="onChooseItem"
+    ></screen-dropdown-menu>
     <flow-top></flow-top>
     <V-Data></V-Data>
     <control></control>
@@ -29,16 +30,44 @@ export default {
   },
   data () {
     return {
-      name: 'wisdom-right'
+      name: 'wisdom-right',
+      menuList: [
+        {
+          label: '选项1',
+          select: true,
+          value: '1'
+        },
+        {
+          label: '选项2',
+          select: true,
+          value: '2'
+        },
+        {
+          label: '选项3',
+          select: true,
+          value: '3'
+        },
+        {
+          label: '选项4',
+          select: true,
+          value: '4'
+        },
+        {
+          label: '选项5',
+          select: true,
+          value: '5'
+        }
+      ]
     }
   },
   methods: {
-    onChangeSearch () {
+    onChooseItem (value) {
+      console.log('value', value)
       this.$router.push({
-        path: '/searchDeatil'
-        // query: {
-        //   id: this.id
-        // }
+        path: '/searchDeatil',
+        query: {
+          id: value.value
+        }
       })
     }
   }
@@ -47,9 +76,11 @@ export default {
 <style lang="scss" scoped>
 .wisdom-right {
   box-sizing: border-box;
-  width: 40%;
+  width: 24%;
   height: 100%;
   z-index: 10;
+  // border: 1px solid red;
+  margin-left: 0.25rem;
   .search {
     width: 100%;
     height: 50px;

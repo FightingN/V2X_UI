@@ -20,11 +20,15 @@
 
 <script>
 import { chartOptionPie, chartOptionPie2 } from './option.js'
+import { debounce } from 'utils/common'
 
 export default {
   name: 'Contaminant',
   data () {
     return {}
+  },
+  mounted () {
+    window.addEventListener('resize', debounce(this.resizeEcharts))
   },
   methods: {
     chartManageBarMethod (myChart) {
@@ -33,9 +37,17 @@ export default {
       this.myChartBar.setOption(chartOptionPie())
     },
     chartManageBarMethod2 (myChart) {
-      this.myChartBar = myChart
+      this.myChartBar2 = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie2())
+      this.myChartBar2.setOption(chartOptionPie2())
+    },
+    resizeEcharts () {
+      if (this.myChartBar) {
+        this.myChartBar.resize()
+      }
+      if (this.myChartBar2) {
+        this.myChartBar2.resize()
+      }
     }
   }
 }
@@ -43,16 +55,16 @@ export default {
 <style lang="scss" scoped>
 .contaminant {
   box-sizing: border-box;
-  width: 853px;
-  height: 505px;
+  width: 100%;
+  height: calc(30% - 0.25rem);
   background-color: #0c1427;
-  border: solid 3px #4d5c9d;
-  padding: 5px 14px 0;
+  border: solid 1px #4d5c9d;
+  padding: 0.0625rem;
   color: #fff;
-  margin-top: 20px;
+  margin-top: 0.125rem;
   .echarts {
     width: 100%;
-    height: 350px;
+    height: 90%;
     display: flex;
     .div {
       width: 50%;

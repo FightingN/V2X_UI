@@ -14,11 +14,11 @@ export default {
 .wisdom-header {
   box-sizing: border-box;
   width: 100%;
-  height: 66px;
-  line-height: 66px;
+  height: 0.875rem;
+  line-height: 0.875rem;
   background: black;
   color: #fff;
   text-align: center;
-  font-size: 60px;
+  font-size: 0.5rem;
 }
 </style>
