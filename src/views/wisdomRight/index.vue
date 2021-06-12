@@ -12,6 +12,7 @@
   </div>
 </template>
 <script>
+import { getRoads } from 'api/wisdomRight.js'
 import FlowTop from '@/views/wisdomRight/FlowTop/FlowTop'
 import VData from './VData/VData'
 import Control from './Control/Control'
@@ -32,41 +33,43 @@ export default {
     return {
       name: 'wisdom-right',
       menuList: [
-        {
-          label: '选项1',
-          select: true,
-          value: '1'
-        },
-        {
-          label: '选项2',
-          select: true,
-          value: '2'
-        },
-        {
-          label: '选项3',
-          select: true,
-          value: '3'
-        },
-        {
-          label: '选项4',
-          select: true,
-          value: '4'
-        },
-        {
-          label: '选项5',
-          select: true,
-          value: '5'
-        }
+        // {
+        //   label: '选项1',
+        //   select: true,
+        //   value: '1'
+        // },
       ]
     }
+  },
+  mounted () {
+    this.getRoads()
   },
   methods: {
     onChooseItem (value) {
       console.log('value', value)
       this.$router.push({
-        path: '/searchDeatil',
-        query: {
-          id: value.value
+        path: '/searchDeatil'
+        // query: {
+        //   id: value.label
+        // }
+      })
+      localStorage.setItem('roadName', value.label)
+    },
+    async getRoads () {
+      const res = await getRoads()
+      res.data.forEach((item, index) => {
+        if (index == 0) {
+          this.menuList.push({
+            label: item,
+            select: true,
+            value: index
+          })
+        } else {
+          this.menuList.push({
+            label: item,
+            select: false,
+            value: index
+          })
         }
       })
     }

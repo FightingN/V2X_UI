@@ -10,6 +10,7 @@ module.exports = {
     config.resolve.alias
       .set('views', join('src/views'))
       .set('utils', join('src/utils'))
+      .set('api', join('src/api'))
       .set('components', join('src/components'))
   },
   // 调整 webpack 配置
@@ -18,6 +19,7 @@ module.exports = {
       echarts: 'echarts'
     }
   },
+  // 跨域的时候才用到
   devServer: {
     proxy: {
       '/api': {

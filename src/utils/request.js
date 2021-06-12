@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: '/api',
+  baseURL: 'http://yapi.elinkservice.cn/mock/84/',
   timeout: 60 * 1000
 })
 
@@ -21,22 +21,15 @@ request.interceptors.request.use(
 // 添加一个响应拦截器
 request.interceptors.response.use(
   response => {
-    if (
-      (response.data.code === 0 && response.data.msg === 'success') ||
-      (response.data.code === 200 && response.data.msg === 'success')
-    ) {
-      return response.data
-    } else {
-      if (response.data.code === 10018) {
-        // token失效
-        setTimeout(() => {
-          window.localStorage.removeItem('token')
-        }, 400)
-        return Promise.reject(new Error('error'))
-      } else {
-        return Promise.reject(response.data)
-      }
-    }
+    // if (
+    //   (response.data.code === 0 && response.data.msg === 'success') ||
+    //   (response.data.code === 200 && response.data.msg === 'success')
+    // ) {
+    //   return response.data
+    // } else {
+    //   return Promise.reject(response.data)
+    // }
+    return response.data
   },
   err => {
     return Promise.reject(err)

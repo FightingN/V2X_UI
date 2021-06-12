@@ -10,6 +10,7 @@
 </template>
 
 <script>
+// import { getEchartsData } from 'api/wisdomRight.js'
 import CenterBox from './components/CenterBox'
 import TopBox from './components/TopBox'
 import BottomBox from './components/BottomBox'
@@ -21,10 +22,21 @@ export default {
     TopBox
   },
   data () {
-    return {}
+    return {
+      categoryId: 1,
+      pageSize: 30,
+      communityId: ''
+    }
   },
-  mounted () {},
-  methods: {}
+  mounted () {
+    this.test()
+  },
+  methods: {
+    // async getEchartsData () {
+    //   // const res = await getEchartsData()
+    //   console.log('res', res)
+    // }
+  }
 }
 </script>
 <style lang="scss" scoped>
