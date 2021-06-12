@@ -24,7 +24,8 @@ export default {
   },
   data () {
     return {
-      myChartBar: null
+      myChartBar: null,
+      interval: null
     }
   },
   mounted () {

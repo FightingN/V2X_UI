@@ -41,10 +41,17 @@ export default {
       carNum: [],
       dataLine: [],
       flowData: [],
-      infoData: []
+      infoData: [],
+      interval: null
     }
   },
   mounted () {
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.interval = setInterval(() => {
+      this.getEchartsData()
+    }, 1000 * 60 * 5)
     this.getEchartsData()
   },
   methods: {
@@ -86,10 +93,10 @@ export default {
       @params avgSpeed 车辆平均速度
       @params  avgHeadWay: 0.61平均车头石距
        */
-      const arr = [res.data[0].avgHeadway]
+      const arr = [res.data[res.data.length - 1].avgHeadway]
       this.dataLine = arr
-      this.dataLine.push(res.data[0].avgSpeed)
-      this.dataLine.push(res.data[0].cartMixRate)
+      this.dataLine.push(res.data[res.data.length - 1].avgSpeed)
+      this.dataLine.push(res.data[res.data.length - 1].cartMixRate)
       // 交通流量
       this.flowData = [
         { value: numsBlueCar, name: '黄牌流量' },
@@ -97,8 +104,8 @@ export default {
         { value: numsYellCar + numsBlueCar, name: '总计' }
       ]
       // 车辆信息展示  ['V2X车辆平均车速', 'V2X车辆氮氧化物排放', '历史V2X车辆数'] v2xAvgSpeed v2xNoxEmissions
-      this.infoData.push(res.data[0].v2xAvgSpeed)
-      this.infoData.push(res.data[0].v2xNoxEmissions)
+      this.infoData.push(res.data[res.data.length - 1].v2xAvgSpeed)
+      this.infoData.push(res.data[res.data.length - 1].v2xNoxEmissions)
       this.infoData.push(numsYellCar + numsBlueCar)
     }
   }
