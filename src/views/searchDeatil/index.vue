@@ -2,7 +2,7 @@
   <div class="search-deail">
     <div class="title">G92_红垦枢纽-机场互通_杭州方向</div>
     <div class="content">
-      <top-box></top-box>
+      <top-box :oxideXdata="oxideXdata" :oxideList="oxideList"></top-box>
       <center-box></center-box>
       <bottom-box></bottom-box>
     </div>
@@ -10,7 +10,7 @@
 </template>
 
 <script>
-// import { getEchartsData } from 'api/wisdomRight.js'
+import { getEchartsData } from 'api/searchDeatil.js'
 import CenterBox from './components/CenterBox'
 import TopBox from './components/TopBox'
 import BottomBox from './components/BottomBox'
@@ -23,19 +23,26 @@ export default {
   },
   data () {
     return {
-      categoryId: 1,
-      pageSize: 30,
-      communityId: ''
+      roadname: localStorage.getItem('roadName'),
+      oxideList: [],
+      oxideXdata: []
     }
   },
   mounted () {
-    this.test()
+    this.getEchartsData()
   },
   methods: {
-    // async getEchartsData () {
-    //   // const res = await getEchartsData()
-    //   console.log('res', res)
-    // }
+    async getEchartsData () {
+      const res = await getEchartsData(this.roadname)
+      // noxEmissions氮氧化物排放物
+      res.data.forEach((item, index) => {
+        // 氮氧化物排放物
+        this.oxideXdata.push(item.formatedTime)
+        this.oxideList.push(item.noxEmissions)
+      })
+      console.log('11', this.oxideXdata)
+      console.log('11', this.oxideList)
+    }
   }
 }
 </script>

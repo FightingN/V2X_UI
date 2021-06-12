@@ -1,7 +1,7 @@
 <template>
   <div class="top-box">
     <div class="echarts-item">
-      <div class="title">氮氧化物排放量230g</div>
+      <div class="title">氮氧化物排放量</div>
       <div class="echarts">
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod"
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="echarts-item">
-      <div class="title">一氧化碳排放量120g</div>
+      <div class="title">一氧化碳排放量</div>
       <div class="echarts">
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod2"
@@ -19,7 +19,7 @@
       </div>
     </div>
     <div class="echarts-item">
-      <div class="title">可吸入物颗粒排放量160g</div>
+      <div class="title">可吸入物颗粒排放量</div>
       <div class="echarts">
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod"
@@ -35,6 +35,16 @@ import { chartOptionPie, chartOptionPie2 } from './option.js'
 import { debounce } from 'utils/common'
 export default {
   name: 'TopBox',
+  props: {
+    oxideXdata: {
+      value: [],
+      default: []
+    },
+    oxideList: {
+      value: [],
+      default: []
+    }
+  },
   data () {
     return {}
   },
@@ -45,7 +55,7 @@ export default {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
+      this.myChartBar.setOption(chartOptionPie(this.oxideXdata, this.oxideList))
     },
     chartManageBarMethod2 (myChart) {
       this.myChartBar2 = myChart

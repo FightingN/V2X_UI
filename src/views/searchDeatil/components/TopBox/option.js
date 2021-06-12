@@ -1,4 +1,4 @@
-export function chartOptionPie() {
+export function chartOptionPie(oxideXdata, oxideList) {
   return {
     tooltip: {
       trigger: 'axis',
@@ -16,7 +16,7 @@ export function chartOptionPie() {
       {
         type: 'category',
         show: false,
-        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月'],
+        data: oxideXdata, //['1月', '2月', '3月', '4月', '5月', '6月', '7月']
         axisLine: {
           lineStyle: {
             color: 'rgba(255,255,255,0.12)'
@@ -53,7 +53,7 @@ export function chartOptionPie() {
     series: [
       {
         type: 'bar',
-        data: [300, 450, 770, 203, 255, 188, 156],
+        data: oxideList, //[300, 450, 770, 203, 255, 188, 156]
         barWidth: '20px',
         itemStyle: {
           normal: {
