@@ -22,7 +22,7 @@
       <div class="title">可吸入物颗粒排放量</div>
       <div class="echarts">
         <wisdom-echarts-frame
-          @myChartMethod="chartManageBarMethod"
+          @myChartMethod="chartManageBarMethod3"
           ref="chartManageBar"
         ></wisdom-echarts-frame>
       </div>
@@ -43,6 +43,14 @@ export default {
     oxideList: {
       value: [],
       default: []
+    },
+    carbonList: {
+      value: [],
+      default: []
+    },
+    inhalableEmissions: {
+      value: [],
+      default: []
     }
   },
   data () {
@@ -53,14 +61,31 @@ export default {
   },
   methods: {
     chartManageBarMethod (myChart) {
-      this.myChartBar = myChart
-      this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie(this.oxideXdata, this.oxideList))
+      setTimeout(() => {
+        this.myChartBar = myChart
+        this.$refs.chartManageBar.clear()
+        this.myChartBar.setOption(
+          chartOptionPie(this.oxideXdata, this.oxideList)
+        )
+      }, 1000)
     },
     chartManageBarMethod2 (myChart) {
-      this.myChartBar2 = myChart
-      this.$refs.chartManageBar.clear()
-      this.myChartBar2.setOption(chartOptionPie2())
+      setTimeout(() => {
+        this.myChartBar2 = myChart
+        this.$refs.chartManageBar.clear()
+        this.myChartBar2.setOption(
+          chartOptionPie2(this.oxideXdata, this.carbonList)
+        )
+      }, 1000)
+    },
+    chartManageBarMethod3 (myChart) {
+      setTimeout(() => {
+        this.myChartBar3 = myChart
+        this.$refs.chartManageBar.clear()
+        this.myChartBar3.setOption(
+          chartOptionPie(this.oxideXdata, this.inhalableEmissions)
+        )
+      }, 1000)
     },
     resizeEcharts () {
       if (this.myChartBar) {
@@ -68,6 +93,9 @@ export default {
       }
       if (this.myChartBar2) {
         this.myChartBar2.resize()
+      }
+      if (this.myChartBar2) {
+        this.myChartBar3.resize()
       }
     }
   }

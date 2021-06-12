@@ -1,4 +1,4 @@
-export function chartOptionPie() {
+export function chartOptionPie(oxideXdata, carNum) {
   return {
     tooltip: {
       trigger: 'axis'
@@ -19,7 +19,7 @@ export function chartOptionPie() {
         splitLine: {
           show: false
         },
-        data: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
+        data: oxideXdata,
         axisTick: {
           show: false
         },
@@ -39,7 +39,6 @@ export function chartOptionPie() {
           show: true
         },
         min: 0,
-        max: 250,
         axisLabel: {
           color: '#999'
         },
@@ -73,7 +72,7 @@ export function chartOptionPie() {
           }
         },
         smooth: true,
-        data: ['40', '80', '50', '120', '70', '190', '80', '120', '40']
+        data: carNum
       }
     ]
   }

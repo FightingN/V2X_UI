@@ -1,5 +1,5 @@
-export function chartOptionPie() {
-  var dataLine = [25, 33, 66]
+export function chartOptionPie(dataLine) {
+  // var dataLine = [25, 33, 66]
   var myColor = ['#1bbf9f', '#1bbf9f', '#1bbf9f']
   return {
     grid: [
@@ -104,7 +104,14 @@ export function chartOptionPie() {
             position: 'right',
             distance: 8,
             formatter: function(data) {
-              return dataLine[data.dataIndex] + '%'
+              if (data.dataIndex == 0) {
+                return dataLine[data.dataIndex] + '辆'
+              } else if (data.dataIndex == 1) {
+                return dataLine[data.dataIndex] + 'g'
+              } else if (data.dataIndex == 2) {
+                return dataLine[data.dataIndex] + 'km/h'
+              }
+              // return dataLine[data.dataIndex] + '%'
             },
             textStyle: {
               color: '#73879c',

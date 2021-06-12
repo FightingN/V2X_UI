@@ -1,4 +1,4 @@
-export function chartOptionPie() {
+export function chartOptionPie(flowData) {
   return {
     tooltip: {
       trigger: 'item'
@@ -36,11 +36,12 @@ export function chartOptionPie() {
         labelLine: {
           show: false
         },
-        data: [
-          { value: 44725, name: '黄牌流量' },
-          { value: 13800, name: '绿牌流量' },
-          { value: 30800, name: '总计' }
-        ]
+        data: flowData
+        // data: [
+        //   { value: 44725, name: '黄牌流量' },
+        //   { value: 13800, name: '绿牌流量' },
+        //   { value: 30800, name: '总计' }
+        // ]
       }
     ]
   }

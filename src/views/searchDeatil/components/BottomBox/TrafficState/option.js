@@ -1,5 +1,5 @@
-export function chartOptionPie() {
-  var dataLine = [25, 33, 66]
+export function chartOptionPie(dataLine) {
+  // var dataLine = [25, 33, 66]
   var myColor = ['#1bbf9f', '#1bbf9f', '#1bbf9f']
   return {
     grid: [

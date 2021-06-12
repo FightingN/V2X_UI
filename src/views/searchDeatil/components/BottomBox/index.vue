@@ -1,8 +1,8 @@
 <template>
   <div class="bottom-box">
-    <traffic-state></traffic-state>
-    <traffic-flow></traffic-flow>
-    <car-info></car-info>
+    <traffic-state :dataLine="dataLine"></traffic-state>
+    <traffic-flow :flowData="flowData"></traffic-flow>
+    <car-info :infoData="infoData"></car-info>
   </div>
 </template>
 
@@ -12,6 +12,20 @@ import TrafficFlow from './TrafficFlow/index'
 import CarInfo from './CarInfo/index'
 export default {
   name: 'BottomBox',
+  props: {
+    dataLine: {
+      value: [],
+      default: []
+    },
+    flowData: {
+      value: [],
+      default: []
+    },
+    infoData: {
+      value: [],
+      default: []
+    }
+  },
   components: {
     TrafficState,
     CarInfo,

@@ -16,6 +16,12 @@ import { debounce } from 'utils/common'
 
 export default {
   name: 'traffic',
+  props: {
+    flowData: {
+      value: [],
+      default: []
+    }
+  },
   data () {
     return {
       myChartBar: null
@@ -26,9 +32,11 @@ export default {
   },
   methods: {
     chartManageBarMethod (myChart) {
-      this.myChartBar = myChart
-      this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
+      setTimeout(() => {
+        this.myChartBar = myChart
+        this.$refs.chartManageBar.clear()
+        this.myChartBar.setOption(chartOptionPie(this.flowData))
+      }, 1000)
     },
     resizeEcharts () {
       if (this.myChartBar) {

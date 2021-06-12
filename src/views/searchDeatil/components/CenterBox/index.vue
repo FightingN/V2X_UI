@@ -16,6 +16,16 @@ import { debounce } from 'utils/common'
 
 export default {
   name: 'CenterBox',
+  props: {
+    oxideXdata: {
+      value: [],
+      default: []
+    },
+    carNum: {
+      value: [],
+      default: []
+    }
+  },
   data () {
     return {
       myChartBar: null
@@ -26,9 +36,11 @@ export default {
   },
   methods: {
     chartManageBarMethod (myChart) {
-      this.myChartBar = myChart
-      this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
+      setTimeout(() => {
+        this.myChartBar = myChart
+        this.$refs.chartManageBar.clear()
+        this.myChartBar.setOption(chartOptionPie(this.oxideXdata, this.carNum))
+      }, 1000)
     },
     resizeEcharts () {
       if (this.myChartBar) {

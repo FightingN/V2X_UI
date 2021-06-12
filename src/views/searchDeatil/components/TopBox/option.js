@@ -36,7 +36,7 @@ export function chartOptionPie(oxideXdata, oxideList) {
         show: false,
         splitNumber: 3,
         axisLabel: {
-          formatter: '{value}',
+          formatter: '{value}g',
           color: '#e2e9ff'
         },
         axisLine: {
@@ -82,7 +82,7 @@ export function chartOptionPie(oxideXdata, oxideList) {
     ]
   }
 }
-export function chartOptionPie2() {
+export function chartOptionPie2(oxideXdata, carbonList) {
   return {
     // backgroundColor: '#fff',
     tooltip: {
@@ -141,20 +141,7 @@ export function chartOptionPie2() {
           show: false
         },
         // boundaryGap: true,
-        data: [
-          '1月',
-          '2月',
-          '3月',
-          '4月',
-          '5月',
-          '6月',
-          '7月',
-          '8月',
-          '9月',
-          '10月',
-          '11月',
-          '12月'
-        ]
+        data: oxideXdata
       }
     ],
 
@@ -240,7 +227,7 @@ export function chartOptionPie2() {
             shadowBlur: 20
           }
         },
-        data: [55, 35, 62, 55, 97, 64, 44, 66, 78, 82, 33, 77]
+        data: carbonList
       }
     ]
   }
