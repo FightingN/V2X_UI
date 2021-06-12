@@ -12,7 +12,6 @@ export function chartOptionPie(dataLine) {
     ],
     xAxis: [
       {
-        max: 100,
         show: false
       }
     ],

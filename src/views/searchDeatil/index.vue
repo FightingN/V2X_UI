@@ -77,6 +77,7 @@ export default {
         numsBlueCar += item.numsBlueCar
         numsYellCar += item.numsYellCar
       })
+
       console.log('氮氧化物排放量', this.oxideList)
       console.log('可吸入物颗粒排放量', this.inhalableEmissions)
       // 交通运行状况

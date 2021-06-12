@@ -35,6 +35,7 @@ export default {
       setTimeout(() => {
         this.myChartBar = myChart
         this.$refs.chartManageBar.clear()
+        // this.myChartBar.setOption(chartOptionPie())
         this.myChartBar.setOption(chartOptionPie(this.infoData))
       }, 1000)
     },
