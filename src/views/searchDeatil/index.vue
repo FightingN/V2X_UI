@@ -77,6 +77,8 @@ export default {
         numsBlueCar += item.numsBlueCar
         numsYellCar += item.numsYellCar
       })
+      console.log('氮氧化物排放量', this.oxideList)
+      console.log('可吸入物颗粒排放量', this.inhalableEmissions)
       // 交通运行状况
       /***
       @params cartMixRate 大车混入率
@@ -97,7 +99,6 @@ export default {
       this.infoData.push(res.data[0].v2xAvgSpeed)
       this.infoData.push(res.data[0].v2xNoxEmissions)
       this.infoData.push(numsYellCar + numsBlueCar)
-      console.log('infoData', this.infoData)
     }
   }
 }
