@@ -261,5 +261,8 @@ export default {
     border-left: 8px solid transparent;
     border-top: 8px solid #eee;
   }
+  .select-label {
+    font-size: 0.175rem;
+  }
 }
 </style>
