@@ -1,6 +1,8 @@
 .DS_Store
 node_modules
 /dist
+backend/springboot-restful-starter/output
+backend/springboot-restful-starter/target
 
 
 # local env files

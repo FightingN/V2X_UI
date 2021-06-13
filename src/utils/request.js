@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: 'http://yapi.elinkservice.cn/mock/84/',
+  baseURL: '接口根路径',
   timeout: 60 * 1000
 })
 

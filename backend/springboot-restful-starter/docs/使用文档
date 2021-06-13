@@ -1,0 +1,10 @@
+
+1. 需要下载JDK， 可以去oracle下载 jdk8
+
+2. 打包需要使用apache maven, 下载地址 https://maven.apache.org/download.cgi
+    安装后就可以，使用 build.sh 里面的指令就可以编译打包
+3. 代码就是 output/seed-*.jar
+
+4. 启动就是  java -jar output/seed*.jar --spring.profiles.active=dev
+
+5. 如何是后台进程的话，使用nohup java -jar output/seed*.jar --spring.profiles.active=dev &
