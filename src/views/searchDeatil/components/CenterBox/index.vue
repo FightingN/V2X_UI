@@ -62,8 +62,8 @@ export default {
       }
     },
     onChangePicker () {
-      console.log('改变了', this.value1)
       this.$emit('onChangePicker', this.value1)
+      this.myChartBar.setOption(chartOptionPie(this.oxideXdata, this.carNum))
     }
   }
 }

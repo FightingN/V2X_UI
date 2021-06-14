@@ -67,14 +67,14 @@ export default {
     async onChangePicker (valueTime) {
       const time = new Date(valueTime)
       const t = time.getTime(time)
-      console.log('1', t)
-
       const params = {
         roadname: this.roadname,
         startTimeStamp: (t / (24 * 60 * 60 * 1000)) * (24 * 60 * 60 * 1000),
         endTimeStamp: (t / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000)
       }
       const res = await getTimeData(params)
+      this.oxideXdata = []
+      this.carNum = []
       res.data.forEach((item, index) => {
         // 氮氧化物排放物
         this.oxideXdata.push(item.formatedTime.slice(10, 13) + '点')
@@ -111,9 +111,6 @@ export default {
         numsBlueCar += item.numsBlueCar
         numsYellCar += item.numsYellCar
       })
-
-      console.log('氮氧化物排放量', this.oxideList)
-      console.log('可吸入物颗粒排放量', this.inhalableEmissions)
       // 交通运行状况
       /***
       @params cartMixRate 大车混入率
