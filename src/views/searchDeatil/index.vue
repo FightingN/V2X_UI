@@ -73,6 +73,7 @@ export default {
         endTimeStamp: (t / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000)
       }
       const res = await getTimeData(params)
+      debugger
       this.oxideXdata = []
       this.carNum = []
       res.data.forEach((item, index) => {
@@ -84,6 +85,8 @@ export default {
     },
     async getEchartsData () {
       const res = await getEchartsData(this.roadname)
+      debugger
+      console.log('getEchartsData', res)
       // noxEmissions氮氧化物排放物
       const carNum = []
       var numsBlueCar = 0
