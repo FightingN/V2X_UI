@@ -4,7 +4,8 @@
   </div>
 </template>
 <script>
-import data from './G92_road.json'
+// import data from './G92_road.json'
+import { getMapData } from 'api/wisdomRight.js'
 export default {
   data () {
     return {
@@ -16,8 +17,14 @@ export default {
     this.getMapData()
   },
   methods: {
-    getMapData () {
-      data.forEach(item => {
+    async getMapData () {
+      // data.forEach(item => {
+      //   this.mapData.push({
+      //     lnglat: item.shape
+      //   })
+      // })
+      const res = await getMapData()
+      res.data.forEach(item => {
         this.mapData.push({
           lnglat: item.shape
         })

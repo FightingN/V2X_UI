@@ -65,11 +65,14 @@ export default {
   },
   methods: {
     async onChangePicker (valueTime) {
-      console.log('1', valueTime)
+      const time = new Date(valueTime)
+      const t = time.getTime(time)
+      console.log('1', t)
+
       const params = {
         roadname: this.roadname,
-        startTimeStamp: valueTime,
-        endTimeStamp: valueTime
+        startTimeStamp: t,
+        endTimeStamp: t
       }
       const res = await getTimeData(params)
       res.data.forEach((item, index) => {

@@ -8,3 +8,9 @@ export function getRoads() {
     method: 'get'
   })
 }
+export function getMapData() {
+  return request({
+    url: 'v1/traffic/map/',
+    method: 'get'
+  })
+}
