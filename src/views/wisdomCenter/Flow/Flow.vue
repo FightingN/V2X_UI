@@ -61,7 +61,7 @@ export default {
 .flow {
   box-sizing: border-box;
   width: 100%;
-  height: 28%;
+  height: 100%;
   background-color: #0c1427;
   border: solid 1px #4c5c9a;
   padding: 0.0625rem;

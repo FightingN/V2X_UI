@@ -16,7 +16,7 @@ export default {
   width: 100%;
   height: 0.875rem;
   line-height: 0.875rem;
-  background: black;
+  background: #070e28;
   color: #fff;
   text-align: center;
   font-size: 0.5rem;

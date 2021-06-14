@@ -21,9 +21,10 @@ export default {
 .wisdom-center {
   box-sizing: border-box;
   width: 50%;
-  height: 100%;
+  height: 28%;
   z-index: 10;
   margin-left: 0.125rem;
   position: relative;
+  top: 72%;
 }
 </style>

@@ -9,7 +9,11 @@
         :inhalableEmissions="inhalableEmissions"
       ></top-box>
 
-      <center-box :carNum="carNum" :oxideXdata="oxideXdata"></center-box>
+      <center-box
+        :carNum="carNum"
+        :oxideXdata="oxideXdata"
+        @onChangePicker="onChangePicker"
+      ></center-box>
       <bottom-box
         :dataLine="dataLine"
         :flowData="flowData"
@@ -20,7 +24,7 @@
 </template>
 
 <script>
-import { getEchartsData } from 'api/searchDeatil.js'
+import { getEchartsData, getTimeData } from 'api/searchDeatil.js'
 import CenterBox from './components/CenterBox'
 import TopBox from './components/TopBox'
 import BottomBox from './components/BottomBox'
@@ -38,7 +42,7 @@ export default {
       oxideXdata: [],
       carbonList: [],
       inhalableEmissions: [],
-      carNum: [],
+      carNum: [], // 历史车流量
       dataLine: [],
       flowData: [],
       infoData: [],
@@ -55,6 +59,21 @@ export default {
     this.getEchartsData()
   },
   methods: {
+    async onChangePicker (valueTime) {
+      console.log('1', valueTime)
+      const params = {
+        roadname: this.roadname,
+        startTimeStamp: valueTime,
+        endTimeStamp: valueTime
+      }
+      const res = await getTimeData(params)
+      res.data.forEach((item, index) => {
+        // 氮氧化物排放物
+        this.oxideXdata.push(item.formatedTime.slice(10, 13) + '点')
+        // 车流量
+        this.carNum.push(item.numsBlueCar + item.numsYellCar)
+      })
+    },
     async getEchartsData () {
       const res = await getEchartsData(this.roadname)
       // noxEmissions氮氧化物排放物

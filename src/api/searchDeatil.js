@@ -8,3 +8,9 @@ export function getEchartsData(roadname) {
     method: 'get'
   })
 }
+export function getTimeData({ roadname, startTimeStamp, endTimeStamp }) {
+  return request({
+    url: `v1/traffic/core-data/all?roadname=${roadname}&startTimeStamp=${startTimeStamp}&endTimeStamp=${endTimeStamp}`,
+    method: 'get'
+  })
+}

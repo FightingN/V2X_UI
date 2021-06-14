@@ -5,16 +5,16 @@
  * @param fn function  要做处理的防抖函数
  * @param delay number 延迟间隔-毫秒级
  */
-export function debounce (fn, delay) {
+export function debounce(fn, delay) {
   const delays = delay || 200
   let timer
-  return function () {
+  return function() {
     const th = this
     const args = arguments
     if (timer) {
       clearTimeout(timer)
     }
-    timer = setTimeout(function () {
+    timer = setTimeout(function() {
       timer = null
       fn.apply(th, args)
     }, delays)
@@ -29,7 +29,15 @@ export function debounce (fn, delay) {
  * @param property string _this 和 property 是因为要把需要改变的属性传递进去，因为函数传参基础数据类型是值拷贝而不是值引用
  * @param step number 当前版本支持 1 0.1 0.01 分别对应 整数变化、一位小数、两位小数
  */
-export function numAnimation (current, target, _this, property, step = 1, totalTime = 1000, duration = 20) {
+export function numAnimation(
+  current,
+  target,
+  _this,
+  property,
+  step = 1,
+  totalTime = 1000,
+  duration = 20
+) {
   let timer
   clearInterval(timer)
   let ternialStep = 0
@@ -40,7 +48,9 @@ export function numAnimation (current, target, _this, property, step = 1, totalT
   }
 
   if (ternialStep > 10) {
-    ternialStep = parseInt(ternialStep).toString().split('')
+    ternialStep = parseInt(ternialStep)
+      .toString()
+      .split('')
     ternialStep[ternialStep.length - 1] = 1
     ternialStep = parseInt(ternialStep.join(''))
   } else {
@@ -49,9 +59,11 @@ export function numAnimation (current, target, _this, property, step = 1, totalT
   if (current < target) {
     timer = setInterval(() => {
       if (step === 0.1) {
-        _this[property] = (_this[property] * 1000 + (step + ternialStep) * 1000) / 1000
+        _this[property] =
+          (_this[property] * 1000 + (step + ternialStep) * 1000) / 1000
       } else if (step === 0.01) {
-        _this[property] = (_this[property] * 1000 + (step + ternialStep) * 1000) / 1000
+        _this[property] =
+          (_this[property] * 1000 + (step + ternialStep) * 1000) / 1000
       } else {
         _this[property] = _this[property] + ternialStep
       }
@@ -63,9 +75,11 @@ export function numAnimation (current, target, _this, property, step = 1, totalT
   } else if (current > target) {
     timer = setInterval(() => {
       if (step === 0.1) {
-        _this[property] = (((_this[property] * 1000) - ((step + ternialStep) * 1000))) / 1000
+        _this[property] =
+          (_this[property] * 1000 - (step + ternialStep) * 1000) / 1000
       } else if (step === 0.01) {
-        _this[property] = (_this[property] * 1000 - (step + ternialStep) * 1000) / 1000
+        _this[property] =
+          (_this[property] * 1000 - (step + ternialStep) * 1000) / 1000
       } else {
         _this[property] = _this[property] - ternialStep
       }
@@ -78,7 +92,7 @@ export function numAnimation (current, target, _this, property, step = 1, totalT
 }
 
 // 每三个数字加一个逗号
-export function handleNum (n) {
+export function handleNum(n) {
   if (isNaN(n)) {
     return n
   }
@@ -91,14 +105,24 @@ export function handleNum (n) {
     return b
   }
   var r = len % 3
-  return r > 0 ? b.slice(0, r) + ',' + b.slice(r, len).match(/\d{3}/g).join(',') : b.slice(r, len).match(/\d{3}/g).join(',')
+  return r > 0
+    ? b.slice(0, r) +
+        ',' +
+        b
+          .slice(r, len)
+          .match(/\d{3}/g)
+          .join(',')
+    : b
+        .slice(r, len)
+        .match(/\d{3}/g)
+        .join(',')
 }
 
 /**
  * 校验只要是数字（包含正负整数，0以及正负浮点数）就返回true
  * 不允许输入特殊字符
  **/
-export function isNumber (val) {
+export function isNumber(val) {
   var regPos = /^[0-9]+.?[0-9]*/ // 判断是否是数字。
   if (regPos.test(val)) {
     var flag = new RegExp(
@@ -115,7 +139,7 @@ export function isNumber (val) {
 }
 
 // 深拷贝
-export function deepCopy (target) {
+export function deepCopy(target) {
   if (typeof target === 'object') {
     const result = Array.isArray(target) ? [] : {}
     for (const key in target) {
@@ -128,4 +152,23 @@ export function deepCopy (target) {
     return result
   }
   return target
+}
+export function getData() {
+  var myDate = new Date()
+  let Y = myDate.getFullYear() //年
+  if (myDate.getMonth() + 1 < 10) {
+    //月
+    var M = myDate.getMonth() + 1
+    M = '0' + M
+  } else {
+    var M = myDate.getMonth() + 1
+  }
+  if (myDate.getDate() < 10) {
+    //日
+    var D = myDate.getDate()
+    D = '0' + D
+  } else {
+    var D = myDate.getDate()
+  }
+  return (myDate = `${Y}-${M}-${D}`) //2019-09-23
 }

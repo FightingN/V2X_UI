@@ -1,6 +1,19 @@
 <template>
   <div class="center-box">
-    <div class="title">历史车流量展示</div>
+    <div class="top">
+      <div class="title">历史车流量展示</div>
+      <div class="picker">
+        <el-date-picker
+          v-model="value1"
+          type="date"
+          placeholder="选择日期"
+          format="yyyy 年 MM 月 dd 日"
+          value-format="yyyy-MM-dd"
+          @change="onChangePicker"
+        >
+        </el-date-picker>
+      </div>
+    </div>
     <div class="echarts">
       <wisdom-echarts-frame
         @myChartMethod="chartManageBarMethod"
@@ -12,7 +25,7 @@
 
 <script>
 import { chartOptionPie } from './option.js'
-import { debounce } from 'utils/common'
+import { debounce, getData } from 'utils/common'
 
 export default {
   name: 'CenterBox',
@@ -28,7 +41,8 @@ export default {
   },
   data () {
     return {
-      myChartBar: null
+      myChartBar: null,
+      value1: getData()
     }
   },
   mounted () {
@@ -46,6 +60,10 @@ export default {
       if (this.myChartBar) {
         this.myChartBar.resize()
       }
+    },
+    onChangePicker () {
+      console.log('改变了', this.value1)
+      this.$emit('onChangePicker', this.value1)
     }
   }
 }
@@ -57,6 +75,16 @@ export default {
   height: calc(51% - 0.25rem);
   background: #fff;
   box-shadow: 0 0 10px 5px #eee;
+  .top {
+    display: flex;
+    padding-right: 0.25rem;
+    .picker {
+      width: 50%;
+      text-align: right;
+      margin-top: 0.125rem;
+    }
+    border: 1px solid #eee;
+  }
   .title {
     box-sizing: border-box;
     width: 100%;
@@ -66,7 +94,6 @@ export default {
     font-weight: bold;
     color: #73879c;
     padding-left: 0.25rem;
-    border: 1px solid #eee;
   }
   .echarts {
     box-sizing: border-box;
