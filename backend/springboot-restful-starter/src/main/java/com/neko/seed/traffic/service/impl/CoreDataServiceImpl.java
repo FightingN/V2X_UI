@@ -66,7 +66,7 @@ public class CoreDataServiceImpl extends ServiceImpl<CoreDataMapper, CoreData> i
         coreDatas.stream()
                 .forEach(
                         c -> {
-                            String f = dateTimeFormatter.format(c.getRecTime());
+                            String f = formatter.format(c.getRecTime());
                             if (recent24Hours.contains(f) && !map.containsKey(f)) {
                                 c.setFormatedTime(f);
                                 map.put(f, c);
@@ -76,6 +76,51 @@ public class CoreDataServiceImpl extends ServiceImpl<CoreDataMapper, CoreData> i
                 );
 
         recent24Hours.stream().forEach(
+                r -> {
+                    if (!map.containsKey(r)) {
+                        CoreData nullData = new CoreData();
+                        nullData.setFormatedTime(r);
+                        map.put(r, nullData);
+                    }
+                }
+
+        );
+        ArrayList<CoreData> coreDatass = new ArrayList<>();
+        map.values().stream().forEach(v -> coreDatass.add(v));
+        return coreDatass;
+    }
+
+
+    public List<CoreData> getDataListByName(String name, Long startTimeStamp, Long endTimeStamp) {
+
+        if (startTimeStamp == null || endTimeStamp == null) {
+            return this.getDataListByName(name);
+        }
+
+        Map<String, CoreData> map = new TreeMap<String, CoreData>((k1, k2) -> {
+            return k1.compareTo(k2);
+        });
+
+        Set<String> rangeHours = this.genTimeRangeSet(startTimeStamp, endTimeStamp);
+
+        QueryWrapper<CoreData> wrapper = new QueryWrapper<>();
+        wrapper.lambda().eq(CoreData::getRoadSectionName, name)
+                .orderByDesc(CoreData::getRecTime);
+        List<CoreData> coreDatas = coreDataMapper.selectList(wrapper);
+
+        coreDatas.stream()
+                .forEach(
+                        c -> {
+                            String f = formatter.format(c.getRecTime());
+                            if (rangeHours.contains(f) && !map.containsKey(f)) {
+                                c.setFormatedTime(f);
+                                map.put(f, c);
+
+                            }
+                        }
+                );
+
+        rangeHours.stream().forEach(
                 r -> {
                     if (!map.containsKey(r)) {
                         CoreData nullData = new CoreData();
@@ -105,6 +150,22 @@ public class CoreDataServiceImpl extends ServiceImpl<CoreDataMapper, CoreData> i
         return result;
     }
 
+    public Set<String> genTimeRangeSet(Long startTimeStamp, Long endTimeStamp) {
+
+        Long start = startTimeStamp;
+        Long end = endTimeStamp;
+        Set<String> result = new HashSet<>();
+
+        while (start <= end) {
+            long l = (start / (60 * 60 * 1000)) * 60 * 60 * 1000;
+            Date d = new Date(l);
+            String f = formatter.format(d);
+            result.add(f);
+            start = l + 60 * 60 * 1000;
+        }
+        return result;
+    }
+
     @Override
     public List<CoreData> topRate() {
         QueryWrapper<CoreData> wrapper = new QueryWrapper<>();
@@ -128,6 +189,7 @@ public class CoreDataServiceImpl extends ServiceImpl<CoreDataMapper, CoreData> i
         );
 
         return result;
+
     }
 
 

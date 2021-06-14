@@ -1,13 +1,15 @@
 package com.neko.seed.traffic.controller;
 
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.neko.seed.base.entity.Result;
 import com.neko.seed.traffic.entity.CoreData;
 import com.neko.seed.traffic.entity.RoadName;
 import com.neko.seed.traffic.service.CoreDataService;
 import com.neko.seed.traffic.service.RoadNameService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,9 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -32,6 +32,7 @@ import java.util.Objects;
 @RequestMapping("/traffic/core-data")
 public class CoreDataController {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(CoreDataController.class);
 
     @Autowired
     private CoreDataService coreDataServiceImpl;
@@ -52,8 +53,6 @@ public class CoreDataController {
     @GetMapping("")
     public Result hello2(String roadname) {
         Objects.requireNonNull(roadname, "路段明细明细信息，路段名称不能为空");
-
-        System.out.println("name--->" + roadname);
         CoreData one = coreDataServiceImpl.getDataByName(roadname);
         return new Result().success(one);
     }
@@ -70,11 +69,18 @@ public class CoreDataController {
     }
 
     @GetMapping("/all")
-    public Result all2(String roadname) {
+    public Result all2(String roadname, String startTimeStamp, String endTimeStamp) {
         Objects.requireNonNull(roadname, "路段明细明细信息，路段名称不能为空");
-        List<CoreData> dataListByName = coreDataServiceImpl.getDataListByName(roadname);
+        LOGGER.info("startTimeStamp={}, endTimeStamp={}");
+        if (StringUtils.isEmpty(startTimeStamp) || StringUtils.isEmpty(endTimeStamp)) {
+            return new Result().success(coreDataServiceImpl.getDataListByName(roadname));
+        }
+        Long start = Long.parseLong(startTimeStamp);
+        Long end = Long.parseLong(endTimeStamp);
+        List<CoreData> dataListByName = coreDataServiceImpl.getDataListByName(roadname, start, end);
         return new Result().success(dataListByName);
     }
+
 
     @GetMapping("/topRate")
     public Result topRate() {

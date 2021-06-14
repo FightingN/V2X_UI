@@ -85,7 +85,6 @@ export default {
     },
     async getEchartsData () {
       const res = await getEchartsData(this.roadname)
-      debugger
       console.log('getEchartsData', res)
       // noxEmissions氮氧化物排放物
       const carNum = []

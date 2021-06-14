@@ -13,6 +13,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import java.util.Objects;
+
 /**
  * 认证注解参数解析器
  *
@@ -44,7 +46,7 @@ public class AuthMethodArgumentResolver implements HandlerMethodArgumentResolver
                 // Token失效，抛出认证异常
                 throw new AuthException();
             }
-        } else if (!parameter.getParameterAnnotation(Auth.class).required()) {
+        } else if (!Objects.isNull(parameter) || !parameter.getParameterAnnotation(Auth.class).required()) {
             // Token为空，判断Token是否可以为空
             return null;
         } else {

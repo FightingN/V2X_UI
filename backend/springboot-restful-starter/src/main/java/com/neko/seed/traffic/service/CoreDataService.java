@@ -22,6 +22,8 @@ public interface CoreDataService extends IService<CoreData> {
 
     List<CoreData> getDataListByName(String name);
 
+    List<CoreData> getDataListByName(String name, Long startTimeStamp, Long endTimeStamp);
+
     List<CoreData> topRate();
 
 }
