@@ -71,8 +71,8 @@ export default {
 
       const params = {
         roadname: this.roadname,
-        startTimeStamp: t,
-        endTimeStamp: t
+        startTimeStamp: (t / (24 * 60 * 60 * 1000)) * (24 * 60 * 60 * 1000),
+        endTimeStamp: (t / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000)
       }
       const res = await getTimeData(params)
       res.data.forEach((item, index) => {
