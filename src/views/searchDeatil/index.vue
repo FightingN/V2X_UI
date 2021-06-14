@@ -1,6 +1,10 @@
 <template>
   <div class="search-deail">
-    <div class="title">{{ roadname }}</div>
+    <div class="title">
+      {{ roadname }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管控措施:{{
+        meausreInfo
+      }}
+    </div>
     <div class="content">
       <top-box
         :oxideXdata="oxideXdata"
@@ -46,7 +50,8 @@ export default {
       dataLine: [],
       flowData: [],
       infoData: [],
-      interval: null
+      interval: null,
+      meausreInfo: '' // 管控措施
     }
   },
   mounted () {
@@ -126,6 +131,11 @@ export default {
       this.infoData.push(res.data[res.data.length - 1].v2xAvgSpeed)
       this.infoData.push(res.data[res.data.length - 1].v2xNoxEmissions)
       this.infoData.push(numsYellCar + numsBlueCar)
+
+      // 管控措施
+      this.meausreInfo = res.data[res.data.length - 1].meausreInfo
+        ? res.data[res.data.length - 1].meausreInfo
+        : '暂无'
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="top-box">
     <div class="echarts-item">
-      <div class="title">氮氧化物排放量</div>
+      <div class="title">氮氧化物预排放量</div>
       <div class="echarts">
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod"
@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="echarts-item">
-      <div class="title">一氧化碳排放量</div>
+      <div class="title">一氧化碳预排放量</div>
       <div class="echarts">
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod2"
