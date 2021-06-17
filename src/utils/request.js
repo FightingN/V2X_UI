@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const request = axios.create({
-  baseURL: '接口根路径',
+  baseURL: 'http://localhost:8081/',
   timeout: 60 * 1000
 })
 
