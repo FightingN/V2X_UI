@@ -1,9 +1,7 @@
 <template>
   <div class="wisdom-box">
-    <!-- <scale-box> -->
     <wisdom-header></wisdom-header>
     <wisdom-content></wisdom-content>
-    <!-- </scale-box> -->
   </div>
 </template>
 
@@ -14,6 +12,11 @@ export default {
   name: 'wisdom-box',
   data () {
     return {}
+  },
+  created () {
+    if (this.$route.query.token) {
+      localStorage.setItem('token', this.$route.query.token)
+    }
   },
   components: {
     wisdomContent,

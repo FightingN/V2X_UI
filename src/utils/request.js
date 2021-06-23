@@ -9,7 +9,10 @@ const request = axios.create({
 request.interceptors.request.use(
   config => {
     if (localStorage.getItem('token')) {
-      config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+      let defaultParams = {
+        'XX-Access-Token': localStorage.getItem('token')
+      }
+      config.headers = Object.assign(defaultParams, config.headers)
     }
     return config
   },
