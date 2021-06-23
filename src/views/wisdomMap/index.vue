@@ -23,12 +23,17 @@ export default {
       //     lnglat: item.shape
       //   })
       // })
-      const res = await getMapData()
-      res.data.forEach(item => {
-        this.mapData.push({
-          lnglat: item.shape
+      try {
+        const res = await getMapData()
+        res.data.forEach(item => {
+          this.mapData.push({
+            lnglat: item.shape
+          })
         })
-      })
+      } catch (err) {
+        console.log('erros', err)
+      }
+
       this.initMap()
     },
     initMap () {

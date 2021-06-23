@@ -4,6 +4,33 @@
       {{ roadname }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;管控措施:{{
         meausreInfo
       }}
+      <div class="picker">
+        <!-- <el-date-picker
+          v-model="value1"
+          type="date"
+          placeholder="选择日期"
+          format="yyyy 年 MM 月 dd 日"
+          value-format="yyyy-MM-dd"
+          @change="onExcelPicker"
+        >
+        </el-date-picker> -->
+        <el-date-picker
+          v-model="value1"
+          type="daterange"
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          format="yyyy 年 MM 月 dd 日"
+          value-format="yyyy-MM-dd"
+        >
+        </el-date-picker>
+        <el-button
+          type="primary"
+          style="margin-left:20px"
+          @click="onExcelPicker"
+          >导出excel</el-button
+        >
+      </div>
     </div>
     <div class="content">
       <top-box
@@ -28,10 +55,16 @@
 </template>
 
 <script>
-import { getEchartsData, getTimeData } from 'api/searchDeatil.js'
+import {
+  getEchartsData,
+  getTimeData,
+  getExportExcel
+} from 'api/searchDeatil.js'
 import CenterBox from './components/CenterBox'
 import TopBox from './components/TopBox'
 import BottomBox from './components/BottomBox'
+import { getData } from 'utils/common'
+
 export default {
   name: 'searchDetail',
   components: {
@@ -41,6 +74,7 @@ export default {
   },
   data () {
     return {
+      value1: '',
       roadname: localStorage.getItem('roadName'),
       oxideList: [],
       oxideXdata: [],
@@ -64,8 +98,47 @@ export default {
     this.getEchartsData()
   },
   methods: {
+    async onExcelPicker () {
+      console.log('111111', this.value1, this.roadname)
+      if (this.value1 == '') {
+        this.$message({
+          message: '请选择导出时间范围',
+          type: 'warning'
+        })
+      } else {
+        const start = new Date(this.value1[0])
+        console.log('start', start)
+        const end = new Date(this.value1[1])
+        const startTimestamp = start.getTime(start)
+        const endTimestamp = end.getTime(end)
+        const params = {
+          roadname: this.roadname,
+          startTimeStamp:
+            (startTimestamp / (24 * 60 * 60 * 1000)) * (24 * 60 * 60 * 1000), // 0点
+          endTimeStamp:
+            (endTimestamp / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000) // 24点
+        }
+        try {
+          const res = await getExportExcel(params)
+          console.log('导出', blob)
+          var blob = new Blob([res], {
+            type: 'application/vnd.ms-excel;charset=UTF-8'
+          })
+          var link = document.createElement('a')
+          link.href = window.URL.createObjectURL(blob)
+          link.download = `${this.roadname}.xls`
+          link.target = '_blank'
+          link.click()
+          window.URL.revokeObjectURL(link.href)
+          // 新窗口打开
+          // window.location.href = `http://localhost:8081/v1/core/export?roadname=${this.roadname}&startTimeStamp=${params.startTimeStamp}&endTimeStamp=${params.endTimeStamp}&skip=true`
+        } catch (error) {}
+      }
+    },
     async onChangePicker (valueTime) {
       const time = new Date(valueTime)
+      console.log('valueTime', valueTime)
+      console.log('time', time)
       const t = time.getTime(time)
       const params = {
         roadname: this.roadname,
@@ -73,7 +146,6 @@ export default {
         endTimeStamp: (t / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000)
       }
       const res = await getTimeData(params)
-      debugger
       this.oxideXdata = []
       this.carNum = []
       res.data.forEach((item, index) => {
@@ -165,6 +237,10 @@ export default {
     width: 100%;
     padding: 0.25rem;
     height: calc(100% - 6.4%);
+  }
+  .picker {
+    width: 50%;
+    text-align: right;
   }
 }
 </style>
