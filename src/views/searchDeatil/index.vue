@@ -5,15 +5,6 @@
         meausreInfo
       }}
       <div class="picker">
-        <!-- <el-date-picker
-          v-model="value1"
-          type="date"
-          placeholder="选择日期"
-          format="yyyy 年 MM 月 dd 日"
-          value-format="yyyy-MM-dd"
-          @change="onExcelPicker"
-        >
-        </el-date-picker> -->
         <el-date-picker
           v-model="value1"
           type="daterange"
@@ -156,60 +147,68 @@ export default {
       })
     },
     async getEchartsData () {
-      const res = await getEchartsData(this.roadname)
-      console.log('getEchartsData', res)
-      // noxEmissions氮氧化物排放物
-      const carNum = []
-      var numsBlueCar = 0
-      var numsYellCar = 0
-      res.data.forEach((item, index) => {
-        // 氮氧化物排放物
-        this.oxideXdata.push(item.formatedTime.slice(10, 13) + '点')
-        this.oxideList.push(item.noxEmissions)
-        // 一氧化碳
-        if (item.carbonMonoxideEmissions == null) {
-          this.carbonList.push('0')
+      try {
+        if (res.code == '500') {
+          if (res.data.url) {
+            window.location.replace(res.data.url)
+          }
         } else {
-          this.carbonList.push(item.carbonMonoxideEmissions)
-        }
-        // inhalableEmissions ---可吸入物
-        if (item.inhalableEmissions == null) {
-          this.carbonList.push('0')
-        } else {
-          this.inhalableEmissions.push(item.inhalableEmissions)
-        }
-        // 车流量
-        this.carNum.push(item.numsBlueCar + item.numsYellCar)
-        item.numsBlueCar = parseInt(item.numsBlueCar)
-        item.numsYellCar = parseInt(item.numsYellCar)
-        numsBlueCar += item.numsBlueCar
-        numsYellCar += item.numsYellCar
-      })
-      // 交通运行状况
-      /***
+          const res = await getEchartsData(this.roadname)
+          console.log('getEchartsData', res)
+          // noxEmissions氮氧化物排放物
+          const carNum = []
+          var numsBlueCar = 0
+          var numsYellCar = 0
+          res.data.forEach((item, index) => {
+            // 氮氧化物排放物
+            this.oxideXdata.push(item.formatedTime.slice(10, 13) + '点')
+            this.oxideList.push(item.noxEmissions)
+            // 一氧化碳
+            if (item.carbonMonoxideEmissions == null) {
+              this.carbonList.push('0')
+            } else {
+              this.carbonList.push(item.carbonMonoxideEmissions)
+            }
+            // inhalableEmissions ---可吸入物
+            if (item.inhalableEmissions == null) {
+              this.carbonList.push('0')
+            } else {
+              this.inhalableEmissions.push(item.inhalableEmissions)
+            }
+            // 车流量
+            this.carNum.push(item.numsBlueCar + item.numsYellCar)
+            item.numsBlueCar = parseInt(item.numsBlueCar)
+            item.numsYellCar = parseInt(item.numsYellCar)
+            numsBlueCar += item.numsBlueCar
+            numsYellCar += item.numsYellCar
+          })
+          // 交通运行状况
+          /***
       @params cartMixRate 大车混入率
       @params avgSpeed 车辆平均速度
       @params  avgHeadWay: 0.61平均车头石距
        */
-      const arr = [res.data[res.data.length - 1].avgHeadway]
-      this.dataLine = arr
-      this.dataLine.push(res.data[res.data.length - 1].avgSpeed)
-      this.dataLine.push(res.data[res.data.length - 1].cartMixRate)
-      // 交通流量
-      this.flowData = [
-        { value: numsBlueCar, name: '黄牌流量' },
-        { value: numsYellCar, name: '绿牌流量' },
-        { value: numsYellCar + numsBlueCar, name: '总计' }
-      ]
-      // 车辆信息展示  ['V2X车辆平均车速', 'V2X车辆氮氧化物排放', '历史V2X车辆数'] v2xAvgSpeed v2xNoxEmissions
-      this.infoData.push(res.data[res.data.length - 1].v2xAvgSpeed)
-      this.infoData.push(res.data[res.data.length - 1].v2xNoxEmissions)
-      this.infoData.push(numsYellCar + numsBlueCar)
+          const arr = [res.data[res.data.length - 1].avgHeadway]
+          this.dataLine = arr
+          this.dataLine.push(res.data[res.data.length - 1].avgSpeed)
+          this.dataLine.push(res.data[res.data.length - 1].cartMixRate)
+          // 交通流量
+          this.flowData = [
+            { value: numsBlueCar, name: '黄牌流量' },
+            { value: numsYellCar, name: '绿牌流量' },
+            { value: numsYellCar + numsBlueCar, name: '总计' }
+          ]
+          // 车辆信息展示  ['V2X车辆平均车速', 'V2X车辆氮氧化物排放', '历史V2X车辆数'] v2xAvgSpeed v2xNoxEmissions
+          this.infoData.push(res.data[res.data.length - 1].v2xAvgSpeed)
+          this.infoData.push(res.data[res.data.length - 1].v2xNoxEmissions)
+          this.infoData.push(numsYellCar + numsBlueCar)
 
-      // 管控措施
-      this.meausreInfo = res.data[res.data.length - 1].meausreInfo
-        ? res.data[res.data.length - 1].meausreInfo
-        : '暂无'
+          // 管控措施
+          this.meausreInfo = res.data[res.data.length - 1].meausreInfo
+            ? res.data[res.data.length - 1].meausreInfo
+            : '暂无'
+        }
+      } catch (error) {}
     }
   }
 }
