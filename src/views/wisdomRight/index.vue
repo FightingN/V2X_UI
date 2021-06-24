@@ -56,22 +56,30 @@ export default {
       localStorage.setItem('roadName', value.label)
     },
     async getRoads () {
-      const res = await getRoads()
-      res.data.forEach((item, index) => {
-        if (index == 0) {
-          this.menuList.push({
-            label: item,
-            select: true,
-            value: index
-          })
+      try {
+        const res = await getRoads()
+        if (res.code == '500') {
+          if (res.data.url) {
+            window.location.replace(res.data.url)
+          }
         } else {
-          this.menuList.push({
-            label: item,
-            select: false,
-            value: index
+          res.data.forEach((item, index) => {
+            if (index == 0) {
+              this.menuList.push({
+                label: item,
+                select: true,
+                value: index
+              })
+            } else {
+              this.menuList.push({
+                label: item,
+                select: false,
+                value: index
+              })
+            }
           })
         }
-      })
+      } catch (error) {}
     }
   }
 }
