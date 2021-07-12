@@ -148,12 +148,12 @@ export default {
     },
     async getEchartsData () {
       try {
+        const res = await getEchartsData(this.roadname)
         if (res.code == '500') {
           if (res.data.url) {
             window.location.replace(res.data.url)
           }
         } else {
-          const res = await getEchartsData(this.roadname)
           console.log('getEchartsData', res)
           // noxEmissions氮氧化物排放物
           const carNum = []

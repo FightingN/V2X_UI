@@ -17,6 +17,7 @@ export function getTimeData({ roadname, startTimeStamp, endTimeStamp }) {
 // 导出
 export function getExportExcel({ roadname, startTimeStamp, endTimeStamp }) {
   return request({
+    // url: `v1/core/export?roadname=${roadname}&startTimeStamp=${startTimeStamp}&endTimeStamp=${endTimeStamp}&skip=true`,
     url: `v1/core/export?roadname=${roadname}&startTimeStamp=${startTimeStamp}&endTimeStamp=${endTimeStamp}`,
     method: 'get',
     responseType: 'blob'

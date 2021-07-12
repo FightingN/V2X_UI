@@ -4,6 +4,7 @@ function join(dir) {
   return path.join(__dirname, dir)
 }
 module.exports = {
+  publicPath: './',
   lintOnSave: false,
   // 调整 webpack 配置
   chainWebpack: config => {
