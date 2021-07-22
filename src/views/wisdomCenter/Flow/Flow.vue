@@ -30,10 +30,21 @@ import { debounce } from 'utils/common'
 export default {
   name: 'Flow',
   data () {
-    return {}
+    return {
+      interval: null
+    }
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
+
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    // this.interval = setInterval(() => {
+    //   this.resizeEcharts()
+    //   this.myChartBar.setOption(chartOptionPie())
+    //   this.myChartBar2.setOption(chartOptionPie2())
+    // }, 1000 * 60 * 10)
   },
   methods: {
     chartManageBarMethod (myChart) {

@@ -1,12 +1,16 @@
-export function chartOptionPie() {
-  var dataLine = [25, 33]
+export function chartOptionPie(dataLine) {
+  // var dataLine = [25, 33]
+  // var dataLine = [
+  //   Math.floor(Math.random() * 100),
+  //   Math.floor(Math.random() * 100)
+  // ]
   var myColor = ['#1960c6', '#bb953a']
   return {
     grid: [
       {
         left: '20%',
         top: '10%',
-        right: '10%',
+        right: '15%',
         bottom: '10%'
       }
     ],
@@ -30,7 +34,7 @@ export function chartOptionPie() {
             fontSize: 12
           }
         },
-        data: ['平均车速', '大车混入率']
+        data: ['大车混入率', '平均车速']
       },
       {
         axisTick: 'none',
@@ -91,7 +95,7 @@ export function chartOptionPie() {
         type: 'bar',
         yAxisIndex: 1,
         barGap: '-100%',
-        data: [90, 90],
+        data: [100, 200],
         barWidth: 15,
         itemStyle: {
           normal: {
@@ -106,7 +110,7 @@ export function chartOptionPie() {
             distance: 10,
             formatter: function(data) {
               if (data.dataIndex == 0) {
-                return dataLine[data.dataIndex] + 'm'
+                return dataLine[data.dataIndex] + '%'
               } else if (data.dataIndex == 1) {
                 return dataLine[data.dataIndex] + 'km/h'
               }

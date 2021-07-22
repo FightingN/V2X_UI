@@ -1,171 +1,16 @@
-export function chartOptionPie() {
-  // return {
-  //   color: ['#419aee', '#2a62bf', '#eaa13a'],
-  //   legend: {
-  //     top: '80%',
-  //     left: '30%',
-  //     itemWidth: 30,
-  //     itemHeight: 20,
-  //     data: ['合计', '蓝牌', '黄牌'],
-  //     textStyle: {
-  //       color: '#fff',
-  //       fontSize: 16
-  //     }
-  //   },
-  //   grid: {
-  //     left: '3%',
-  //     right: '5%',
-  //     bottom: '0%',
-  //     top: '5%',
-  //     containLabel: true
-  //   },
-  //   xAxis: {
-  //     show: false,
-  //     type: 'value',
-  //     axisLabel: {
-  //       // show: true,
-  //       textStyle: {
-  //         color: '#fff',
-  //         fontSize: 16
-  //       }
-  //     },
-  //     axisTick: {
-  //       show: false
-  //     },
-  //     axisLine: {
-  //       show: false
-  //     }
-  //   },
-  //   yAxis: {
-  //     type: 'category',
-  //     axisTick: {
-  //       show: false
-  //     },
-  //     axisLine: {
-  //       show: false
-  //     },
-  //     axisLabel: {
-  //       textStyle: {
-  //         color: '#fff',
-  //         fontSize: 16
-  //       }
-  //     },
-  //     data: ['', '', '']
-  //   },
-  //   series: [
-  //     {
-  //       name: '合计',
-  //       type: 'bar',
-  //       stack: 'Tik Tok',
-  //       barWidth: 25,
-  //       itemStyle: {
-  //         shadowColor: 'rgba(0, 0, 0, .3)',
-  //         shadowBlur: 1,
-  //         shadowOffsetY: 1,
-  //         shadowOffsetX: 0,
-  //         emphasis: {
-  //           borderWidth: '10',
-  //           borderColor: '#de0b1a',
-  //           color: '#fff',
-  //           opacity: 1,
-  //           shadowColor: '#de0b1a',
-  //           shadowBlur: 0,
-  //           shadowOffsetY: 0,
-  //           shadowOffsetX: 0
-  //         }
-  //       },
-  //       label: {
-  //         normal: {
-  //           show: true,
-  //           position: 'inside',
-  //           formatter: '{c}',
-  //           textStyle: {
-  //             align: 'center',
-  //             baseline: 'middle',
-  //             fontSize: 16,
-  //             fontWeight: '400',
-  //             color: '#fff'
-  //           }
-  //         }
-  //       },
-  //       data: [29, 19, 26, 44, 20, 21, 32, 34]
-  //     },
-  //     {
-  //       name: '蓝牌',
-  //       type: 'bar',
-  //       stack: 'Tik Tok',
-  //       barWidth: 25,
-  //       itemStyle: {
-  //         shadowColor: 'rgba(0, 0, 0, .3)',
-  //         shadowBlur: 1,
-  //         shadowOffsetY: 1,
-  //         shadowOffsetX: 0,
-  //         emphasis: {
-  //           borderWidth: '10',
-  //           borderColor: '#d6d6d6',
-  //           color: '#d6d6d6',
-  //           opacity: 1,
-  //           shadowColor: '#d6d6d6',
-  //           shadowBlur: 0,
-  //           shadowOffsetY: 0,
-  //           shadowOffsetX: 0
-  //         }
-  //       },
-  //       label: {
-  //         normal: {
-  //           show: true,
-  //           position: 'inside',
-  //           formatter: '{c}',
-  //           textStyle: {
-  //             align: 'center',
-  //             baseline: 'middle',
-  //             fontSize: 16,
-  //             fontWeight: '400',
-  //             color: '#fff'
-  //           }
-  //         }
-  //       },
-  //       data: [38, 36, 44, 33, 21, 32, 41, 45]
-  //     },
-  //     {
-  //       name: '黄牌',
-  //       type: 'bar',
-  //       stack: 'Tik Tok',
-  //       barWidth: 25,
-  //       itemStyle: {
-  //         shadowColor: 'rgba(0, 0, 0, .3)',
-  //         shadowBlur: 1,
-  //         shadowOffsetY: 1,
-  //         shadowOffsetX: 0,
-  //         emphasis: {
-  //           borderWidth: '10',
-  //           borderColor: '#00c1c1',
-  //           color: '#00c1c1',
-  //           opacity: 1,
-  //           shadowColor: '#00c1c1',
-  //           shadowBlur: 0,
-  //           shadowOffsetY: 0,
-  //           shadowOffsetX: 0
-  //         }
-  //       },
-  //       label: {
-  //         normal: {
-  //           show: true,
-  //           position: 'inside',
-  //           formatter: '{c}',
-  //           textStyle: {
-  //             align: 'center',
-  //             baseline: 'middle',
-  //             fontSize: 16,
-  //             fontWeight: '400',
-  //             color: '#fff'
-  //           }
-  //         }
-  //       },
-  //       data: [33, 45, 30, 23, 59, 47, 27, 21]
-  //     }
-  //   ]
-  // }
+export function chartOptionPie(XData, data1, data2, data3) {
+  // var data1 = [
+  //   Math.floor(Math.random() * 100),
+  //   Math.floor(Math.random() * 100),
+  //   Math.floor(Math.random() * 100)
+  // ]
+  // var data2 = [
+  //   Math.floor(Math.random() * 100),
+  //   Math.floor(Math.random() * 100),
+  //   Math.floor(Math.random() * 100)
+  // ]
+  // var data3 = [data1[0] + data2[0], data1[1] + data2[1], data1[2] + data2[2]]
+
   return {
     // '#419aee', '#2a62bf', '#eaa13a'
     color: ['#419aee', '#2a62bf', '#eaa13a'],
@@ -192,11 +37,8 @@ export function chartOptionPie() {
       }
     },
     xAxis: {
-      data: [
-        'G92_红垦枢纽_宁波方向',
-        'G92_红垦枢纽_杭州方向',
-        'G92_红垦枢纽_杭州方向'
-      ],
+      // type: 'category',
+      data: XData,
       axisLine: {
         show: true, //隐藏X轴轴线
         lineStyle: {
@@ -255,6 +97,33 @@ export function chartOptionPie() {
         }
       }
     },
+    dataZoom: [
+      {
+        show: true,
+        height: 12,
+        xAxisIndex: [0],
+        bottom: '8%',
+        start: 0,
+        end: 0,
+        handleIcon:
+          'path://M306.1,413c0,2.2-1.8,4-4,4h-59.8c-2.2,0-4-1.8-4-4V200.8c0-2.2,1.8-4,4-4h59.8c2.2,0,4,1.8,4,4V413z',
+        handleSize: '110%',
+        handleStyle: {
+          color: '#d3dee5'
+        },
+        textStyle: {
+          color: '#fff'
+        },
+        borderColor: '#90979c'
+      },
+      {
+        type: 'inside',
+        show: true,
+        height: 15,
+        start: 1,
+        end: 3
+      }
+    ],
     yAxis: [
       {
         type: 'value',
@@ -322,7 +191,8 @@ export function chartOptionPie() {
             borderWidth: 2
           }
         },
-        data: [4, 3, 2, 8, 3, 5]
+        // data: [4, 3, 2]
+        data: data3
       },
       {
         name: '蓝牌',
@@ -334,7 +204,8 @@ export function chartOptionPie() {
             borderWidth: 2
           }
         },
-        data: [3, 2, 3, 5, 4, 3]
+        // data: [3, 2, 3, 5, 4, 3]
+        data: data1
       },
       {
         name: '黄牌',
@@ -346,7 +217,8 @@ export function chartOptionPie() {
             borderWidth: 2
           }
         },
-        data: [3, 2, 3, 5, 4, 3]
+        // data: [3, 2, 3, 5, 4, 3]
+        data: data2
       }
     ]
   }

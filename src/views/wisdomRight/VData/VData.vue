@@ -2,33 +2,51 @@
   <div class="v-data border">
     <div class="title title-style">路段服务水平评价</div>
     <div class="content">
-      <div class="item item-title">
-        <span>路段名称</span>
-        <span class="span2">服务水平</span>
-      </div>
-      <div class="item">
-        <span>G92_红垦枢纽-机场互通_杭州方向</span>
-        <span class="span2">B级</span>
-      </div>
-      <div class="item">
-        <span>G92_瓜沥枢纽-柯桥互通_杭州方向</span>
-        <span class="span2">C级</span>
-      </div>
-      <div class="item">
-        <span>G92_红垦枢纽-机场互通_宁波方向</span>
-        <span class="span2">D级</span>
-      </div>
+      <template v-if="serviceData.length > 0">
+        <div class="item item-title">
+          <span>路段名称</span>
+          <span class="span2">服务水平</span>
+        </div>
+        <div class="item" v-for="(item, index) in serviceData" :key="index">
+          <span>{{ item.recRoadSectionName }}</span>
+          <span class="span2">{{ item.serviceLevel }}级</span>
+        </div>
+      </template>
+      <template v-else>
+        <div class="no-data">暂无数据~</div>
+      </template>
     </div>
   </div>
 </template>
 
 <script>
+import { getService } from 'api/wisdomRight.js'
+
 export default {
   name: 'index',
   data () {
-    return {}
+    return {
+      roadName: '',
+      serviceData: [],
+      interval: null
+    }
   },
-  methods: {}
+  mounted () {
+    this.getService()
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.interval = setInterval(() => {
+      this.getService()
+    }, 1000 * 60 * 10)
+  },
+  methods: {
+    async getService () {
+      const res = await getService(this.roadName)
+      console.log('路段服务水平评价', res)
+      this.serviceData = res.data
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>

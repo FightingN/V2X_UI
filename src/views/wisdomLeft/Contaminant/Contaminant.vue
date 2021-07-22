@@ -21,25 +21,40 @@
 <script>
 import { chartOptionPie, chartOptionPie2 } from './option.js'
 import { debounce } from 'utils/common'
+import { getCoreData } from 'api/leftApi.js'
 
 export default {
   name: 'Contaminant',
   data () {
-    return {}
+    return {
+      roadName: '路网',
+      interval: null,
+      // 可摄入数据
+      data1: 0,
+      // 氮氧化物排放物
+      data2: 0
+    }
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.getCoreData()
+    this.interval = setInterval(() => {
+      this.getCoreData()
+    }, 1000 * 60)
   },
   methods: {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
+      this.myChartBar.setOption(chartOptionPie(this.data1))
     },
     chartManageBarMethod2 (myChart) {
       this.myChartBar2 = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar2.setOption(chartOptionPie2())
+      this.myChartBar2.setOption(chartOptionPie2(this.data2))
     },
     resizeEcharts () {
       if (this.myChartBar) {
@@ -48,6 +63,13 @@ export default {
       if (this.myChartBar2) {
         this.myChartBar2.resize()
       }
+    },
+    async getCoreData () {
+      const res = await getCoreData(this.roadName)
+      this.data1 = res.data.inhalableEmissions
+      this.data2 = res.data.noxEmissions
+      this.myChartBar.setOption(chartOptionPie(this.data1))
+      this.myChartBar2.setOption(chartOptionPie2(this.data2))
     }
   }
 }

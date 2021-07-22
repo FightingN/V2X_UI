@@ -1,4 +1,18 @@
 export function chartOptionPie() {
+  var data = [
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000)
+  ]
   return {
     // backgroundColor: 'rgba(0,0,0,.5)',
     grid: {
@@ -93,20 +107,21 @@ export function chartOptionPie() {
         type: 'line',
         smooth: true,
         stack: '交通流量',
-        data: [
-          7000,
-          6900,
-          9500,
-          14500,
-          18400,
-          21500,
-          25200,
-          26500,
-          23300,
-          18300,
-          13900,
-          9600
-        ],
+        data,
+        // data: [
+        //   7000,
+        //   6900,
+        //   9500,
+        //   14500,
+        //   18400,
+        //   21500,
+        //   25200,
+        //   26500,
+        //   23300,
+        //   18300,
+        //   13900,
+        //   9600
+        // ],
         itemStyle: {
           normal: { color: 'rgba(52,177,95,0.9)' }
         }
@@ -115,6 +130,20 @@ export function chartOptionPie() {
   }
 }
 export function chartOptionPie2() {
+  var data = [
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000),
+    Math.floor(Math.random() * 1000)
+  ]
   return {
     // backgroundColor: 'rgba(0,0,0,.5)',
     grid: {
@@ -209,20 +238,21 @@ export function chartOptionPie2() {
         type: 'line',
         smooth: true,
         stack: '交通流量',
-        data: [
-          7000,
-          6900,
-          9500,
-          14500,
-          18400,
-          21500,
-          25200,
-          26500,
-          23300,
-          18300,
-          13900,
-          9600
-        ],
+        data,
+        // [
+        //   7000,
+        //   6900,
+        //   9500,
+        //   14500,
+        //   18400,
+        //   21500,
+        //   25200,
+        //   26500,
+        //   23300,
+        //   18300,
+        //   13900,
+        //   9600
+        // ],
         itemStyle: {
           normal: { color: 'rgba(41,138,231,0.9)' }
         }

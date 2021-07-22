@@ -1,19 +1,29 @@
 <template>
   <div class="v-data border">
     <div class="title title-style">管控措施</div>
-    <div class="content">
-      G92_红垦枢纽-机场互通_宁波方向K192-K196发生拥堵,建议车辆限速降低至80Km/h
-    </div>
+    <div class="content">{{ measure }}</div>
   </div>
 </template>
 
 <script>
+import { getServiceTodo } from 'api/wisdomRight.js'
 export default {
   name: 'Control',
   data () {
-    return {}
+    return {
+      roadName: '',
+      measure: ''
+    }
   },
-  methods: {}
+  mounted () {
+    this.getServiceTodo()
+  },
+  methods: {
+    async getServiceTodo () {
+      const res = await getServiceTodo(this.roadName)
+      this.measure = res.data[0].needTodo
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
@@ -31,6 +41,7 @@ export default {
     font-size: 16px;
     line-height: 0.5rem;
     margin-top: 0.25rem;
+    word-break: break-all;
   }
 }
 </style>

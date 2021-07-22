@@ -1,11 +1,24 @@
 <template>
-  <div class="wisdom-header">V2X SERVER管理系统交通仿真模块</div>
+  <div class="wisdom-header">
+    <div>V2X SERVER管理系统交通仿真模块</div>
+    <div class="navgation" @click="navgationTo">后台</div>
+  </div>
 </template>
 <script>
 export default {
   data () {
     return {
       name: 'wisdomHeader'
+    }
+  },
+  mounted () {},
+  methods: {
+    navgationTo () {
+      window.open(
+        // `http://172.17.204.221?token=${localStorage.getItem('token')}`,
+        `http://172.17.204.221/big?token=${localStorage.getItem('token')}`,
+        '_blank'
+      )
     }
   }
 }
@@ -20,5 +33,24 @@ export default {
   color: #fff;
   text-align: center;
   font-size: 0.5rem;
+  position: relative;
+  div {
+    display: inline-block;
+  }
+  .navgation {
+    position: absolute;
+    right: 3%;
+    top: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 1.3rem;
+    height: 0.55rem;
+    font-size: 0.2rem;
+    font-weight: bold;
+    background: url('../../assets/nav.png') no-repeat center;
+    background-size: 100% 100%;
+    color: #12d0ff;
+  }
 }
 </style>

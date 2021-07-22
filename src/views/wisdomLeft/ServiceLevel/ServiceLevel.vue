@@ -2,7 +2,7 @@
   <div class="service-level">
     <div class="title">
       <span>服务水平 B级</span>
-      <span class="right">拥堵路段占比：10%</span>
+      <!-- <span class="right">拥堵路段占比：10%</span> -->
     </div>
     <div class="content">
       <wisdom-echarts-frame
@@ -16,25 +16,41 @@
 <script>
 import { debounce } from 'utils/common'
 import { chartOptionPie } from './option.js'
-
+import { getCoreData } from 'api/leftApi.js'
 export default {
   name: 'ServiceLevel',
   data () {
-    return {}
+    return {
+      interval: null,
+      roadName: '路网',
+      echartsData: [25, 33]
+    }
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
+    this.getCoreData()
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.interval = setInterval(() => {
+      this.getCoreData()
+    }, 1000 * 60)
   },
   methods: {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
+      this.myChartBar.setOption(chartOptionPie(this.echartsData))
     },
     resizeEcharts () {
       if (this.myChartBar) {
         this.myChartBar.resize()
       }
+    },
+    async getCoreData () {
+      const res = await getCoreData(this.roadName)
+      this.echartsData = [res.data.cartMixRate * 100, res.data.avgSpeed]
+      this.myChartBar.setOption(chartOptionPie(this.echartsData))
     }
   }
 }

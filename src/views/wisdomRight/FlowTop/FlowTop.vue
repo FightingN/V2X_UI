@@ -24,25 +24,63 @@
 <script>
 import { chartOptionPie } from './option.js'
 import { debounce } from 'utils/common'
-
+import { getTopRate } from 'api/wisdomRight.js'
 export default {
   name: 'FlowTop',
   data () {
-    return {}
+    return {
+      interval: null,
+      XData: [],
+      data1: [], // 蓝牌
+      data2: [], // 黄牌
+      data3: []
+    }
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    // this.interval = setInterval(() => {
+    //   this.resizeEcharts()
+    //   this.myChartBar.setOption(chartOptionPie())
+    // }, 1000)
+    this.getTopRate()
   },
   methods: {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
+      this.myChartBar.setOption(
+        chartOptionPie(this.XData, this.data1, this.data2, this.data3)
+      )
     },
     resizeEcharts () {
       if (this.myChartBar) {
         this.myChartBar.resize()
       }
+    },
+    async getTopRate () {
+      if (this.XData.length > 0) {
+        this.XData = []
+      }
+      const res = await getTopRate()
+      // 得到x轴坐标
+      const arr = []
+      res.data.forEach(item => {
+        arr.push(item.roadSectionName)
+      })
+      this.XData = arr
+      res.data.forEach((item, index) => {
+        this.data1.push(item.numsBlueCar)
+        this.data2.push(item.numsYellCar)
+      })
+      this.data1.forEach((item, index) => {
+        this.data3.push(item + this.data2[index])
+      })
+      this.myChartBar.setOption(
+        chartOptionPie(this.XData, this.data1, this.data2, this.data3)
+      )
     }
   }
 }

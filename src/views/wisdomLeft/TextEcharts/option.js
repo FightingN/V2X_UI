@@ -1,4 +1,12 @@
-export function chartOptionPie() {
+export function chartOptionPie(data) {
+  // var data = [
+  // { value: 44725, name: '黄牌流量' },
+  // { value: 13800, name: '绿牌流量' },
+  // { value: 30800, name: '总计' }
+  // { value: Math.floor(Math.random() * 1000), name: '黄牌流量' },
+  // { value: Math.floor(Math.random() * 1000), name: '绿牌流量' },
+  // { value: Math.floor(Math.random() * 1000), name: '总计' }
+  // ]
   return {
     tooltip: {
       trigger: 'item'
@@ -36,11 +44,7 @@ export function chartOptionPie() {
         labelLine: {
           show: false
         },
-        data: [
-          { value: 44725, name: '黄牌流量' },
-          { value: 13800, name: '绿牌流量' },
-          { value: 30800, name: '总计' }
-        ]
+        data
       }
     ]
   }
