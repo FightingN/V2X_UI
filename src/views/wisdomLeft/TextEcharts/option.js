@@ -22,7 +22,7 @@ export function chartOptionPie(data) {
         fontSize: 16
       }
     },
-    color: ['#2b62bf', '#b5954a', '#419aee'],
+    color: ['#b5954a', '#2b62bf', '#419aee'],
     series: [
       {
         name: '交通流量',

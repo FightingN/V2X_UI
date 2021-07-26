@@ -1,7 +1,7 @@
 <template>
   <div class="service-level">
     <div class="title">
-      <span>服务水平 B级</span>
+      <span>服务水平 {{ serviceLevel }}级</span>
       <!-- <span class="right">拥堵路段占比：10%</span> -->
     </div>
     <div class="content">
@@ -23,7 +23,8 @@ export default {
     return {
       interval: null,
       roadName: '路网',
-      echartsData: [25, 33]
+      echartsData: [25, 33],
+      serviceLevel: ''
     }
   },
   mounted () {
@@ -51,6 +52,7 @@ export default {
       const res = await getCoreData(this.roadName)
       this.echartsData = [res.data.cartMixRate * 100, res.data.avgSpeed]
       this.myChartBar.setOption(chartOptionPie(this.echartsData))
+      this.serviceLevel = res.data.serviceLevel
     }
   }
 }

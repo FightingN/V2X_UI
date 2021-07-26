@@ -50,7 +50,7 @@ export default {
       const res = await getCoreData(this.roadName)
       this.echartsData = [
         { value: res.data.numsYellCar, name: '黄牌流量' },
-        { value: res.data.numsBlueCar, name: '绿牌流量' },
+        { value: res.data.numsBlueCar, name: '蓝牌流量' },
         { value: res.data.numsYellCar + res.data.numsBlueCar, name: '总计' }
       ]
       this.myChartBar.setOption(chartOptionPie(this.echartsData))

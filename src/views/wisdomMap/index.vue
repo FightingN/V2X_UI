@@ -27,7 +27,8 @@ export default {
         const res = await getMapData()
         res.data.forEach(item => {
           this.mapData.push({
-            lnglat: item.shape
+            lnglat: item.shape,
+            flow: Math.random() * 1000
           })
         })
       } catch (err) {
@@ -43,24 +44,72 @@ export default {
         mapStyle: 'amap://styles/grey',
         zoom: 5
       })
+      var colors = [
+        '#07E8E4',
+        '#1f78b4',
+        '#b2df8a',
+        '#33a02c',
+        '#fb9a99',
+        '#e31a1c',
+        '#fdbf6f',
+        '#ff7f00'
+      ]
       var polyline
       this.mapData.forEach(item => {
-        polyline = new AMap.Polyline({
-          path: item.lnglat,
-          isOutline: true,
-          outlineColor: '#a6f993',
-          borderWeight: 1,
-          strokeColor: '#a6f993',
-          strokeOpacity: 1,
-          strokeWeight: 1,
-          // 折线样式还支持 'dashed'
-          strokeStyle: 'solid',
-          // strokeStyle是dashed时有效
-          strokeDasharray: [10, 5],
-          lineJoin: 'round',
-          lineCap: 'round',
-          zIndex: 5
-        })
+        console.log('1', item.flow)
+        if (item.flow < 300) {
+          polyline = new AMap.Polyline({
+            path: item.lnglat,
+            isOutline: true,
+            outlineColor: 'green',
+            borderWeight: 1,
+            strokeColor: 'green',
+            strokeOpacity: 1,
+            strokeWeight: 1,
+            // 折线样式还支持 'dashed'
+            strokeStyle: 'solid',
+            // strokeStyle是dashed时有效
+            strokeDasharray: [10, 5],
+            lineJoin: 'round',
+            lineCap: 'round',
+            zIndex: 5
+          })
+        } else if (item.flow > 300 && item.flow < 500) {
+          polyline = new AMap.Polyline({
+            path: item.lnglat,
+            isOutline: true,
+            outlineColor: 'yellow',
+            borderWeight: 1,
+            strokeColor: 'yellow',
+            strokeOpacity: 1,
+            strokeWeight: 1,
+            // 折线样式还支持 'dashed'
+            strokeStyle: 'solid',
+            // strokeStyle是dashed时有效
+            strokeDasharray: [10, 5],
+            lineJoin: 'round',
+            lineCap: 'round',
+            zIndex: 5
+          })
+        } else {
+          polyline = new AMap.Polyline({
+            path: item.lnglat,
+            isOutline: true,
+            outlineColor: 'red',
+            borderWeight: 1,
+            strokeColor: 'red',
+            strokeOpacity: 1,
+            strokeWeight: 1,
+            // 折线样式还支持 'dashed'
+            strokeStyle: 'solid',
+            // strokeStyle是dashed时有效
+            strokeDasharray: [10, 5],
+            lineJoin: 'round',
+            lineCap: 'round',
+            zIndex: 5
+          })
+        }
+
         polyline.setMap(map)
       })
       // 缩放地图到合适的视野级别

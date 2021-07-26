@@ -2,11 +2,22 @@
   <div class="v-data border">
     <div class="title title-style">态势预警</div>
     <div class="content">
-      <template v-if="itemData.length > 0">
+      <!-- <template v-if="itemData.length > 0">
         <div class="item" v-for="(item, index) in itemData" :key="index">
           <span>{{ item.recRoadSectionName }}</span>
           <span class="span2">{{ item.numsRate }}辆/10分钟</span>
         </div>
+      </template>
+      <template v-else>
+        <div class="no-data">暂无数据~</div>
+      </template> -->
+      <template v-if="itemData.length > 0">
+        <screen-table
+          :headerData="headerList"
+          :tableContent="itemData"
+          :ava="2"
+          :tableContentAva="3"
+        ></screen-table>
       </template>
       <template v-else>
         <div class="no-data">暂无数据~</div>
@@ -24,7 +35,8 @@ export default {
     return {
       roadName: '路网',
       itemData: [],
-      interval: null
+      interval: null,
+      headerList: []
     }
   },
   mounted () {
@@ -38,8 +50,16 @@ export default {
   },
   methods: {
     async getSituation () {
+      if (this.itemData.length > 0) {
+        this.itemData = []
+      }
       const res = await getSituation()
-      this.itemData = res.data
+      res.data.forEach(item => {
+        this.itemData.push({
+          recRoadSectionName: item.recRoadSectionName,
+          numsRate: item.numsRate + '辆/10分钟'
+        })
+      })
     }
   }
 }
@@ -77,6 +97,21 @@ export default {
       background: rgba(21, 33, 77, 0.6);
       color: #3c7ca9;
       font-size: 16px;
+    }
+    /deep/ .screenTable .header {
+      height: 0%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      background: rgba(21, 33, 77, 0.6);
+      color: #3c7ca9;
+      font-size: 0.2rem;
+    }
+    /deep/ .screenTable .table-body {
+      height: 100%;
+    }
+    /deep/ .screenTable .table-body .scroll-view .tableContent {
+      border: none;
     }
   }
 }

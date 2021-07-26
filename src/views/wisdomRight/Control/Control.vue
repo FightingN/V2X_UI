@@ -1,7 +1,19 @@
 <template>
   <div class="v-data border">
     <div class="title title-style">管控措施</div>
-    <div class="content">{{ measure }}</div>
+    <div class="content">
+      <template v-if="measureData.length > 0">
+        <screen-table
+          :headerData="headerList"
+          :tableContent="measureData"
+          :ava="1"
+          :tableContentAva="3"
+        ></screen-table>
+      </template>
+      <template v-else>
+        <div class="no-data">暂无数据~</div>
+      </template>
+    </div>
   </div>
 </template>
 
@@ -11,8 +23,9 @@ export default {
   name: 'Control',
   data () {
     return {
-      roadName: '',
-      measure: ''
+      roadName: '路网',
+      measureData: [],
+      headerList: []
     }
   },
   mounted () {
@@ -20,8 +33,15 @@ export default {
   },
   methods: {
     async getServiceTodo () {
+      if (this.measureData.length > 0) {
+        this.measureData = []
+      }
       const res = await getServiceTodo(this.roadName)
-      this.measure = res.data[0].needTodo
+      res.data.forEach(item => {
+        this.measureData.push({
+          needTodo: item.needTodo
+        })
+      })
     }
   }
 }
@@ -37,11 +57,27 @@ export default {
   margin-top: 0.25rem;
   .content {
     width: 100%;
+    height: 80%;
     color: #fff;
     font-size: 16px;
     line-height: 0.5rem;
-    margin-top: 0.25rem;
+    // margin-top: 0.25rem;
     word-break: break-all;
+    /deep/ .screenTable .header {
+      height: 0%;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      background: rgba(21, 33, 77, 0.6);
+      color: #3c7ca9;
+      font-size: 0.2rem;
+    }
+    /deep/ .screenTable .table-body {
+      height: 100%;
+    }
+    /deep/ .screenTable .table-body .scroll-view .tableContent {
+      border: none;
+    }
   }
 }
 </style>

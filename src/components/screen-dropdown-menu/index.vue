@@ -232,7 +232,7 @@ export default {
       line-height: 50px;
       text-align: left;
       color: #fff;
-      font-size: 0.15rem;
+      font-size: 0.175rem;
       box-sizing: border-box;
       padding: 0 12px;
       &:hover {
