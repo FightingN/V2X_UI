@@ -14,7 +14,7 @@ export function chartOptionPie(flowData) {
         fontSize: 26
       }
     },
-    color: ['#3498db', '#1abb9c', '#419aee'],
+    color: ['#b5954a', '#2b62bf', '#419aee'],
     series: [
       {
         name: '交通流量',

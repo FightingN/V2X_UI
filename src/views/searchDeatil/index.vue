@@ -195,7 +195,7 @@ export default {
           // 交通流量
           this.flowData = [
             { value: numsBlueCar, name: '黄牌流量' },
-            { value: numsYellCar, name: '绿牌流量' },
+            { value: numsYellCar, name: '蓝牌流量' },
             { value: numsYellCar + numsBlueCar, name: '总计' }
           ]
           // 车辆信息展示  ['V2X车辆平均车速', 'V2X车辆氮氧化物排放', '历史V2X车辆数'] v2xAvgSpeed v2xNoxEmissions
