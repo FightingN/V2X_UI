@@ -65,6 +65,7 @@ export default {
         this.XData = []
       }
       const res = await getTopRate()
+      console.log('Top', res)
       // 得到x轴坐标
       const arr = []
       res.data.forEach(item => {

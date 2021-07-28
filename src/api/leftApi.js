@@ -6,3 +6,10 @@ export function getCoreData(roadName) {
     method: 'get'
   })
 }
+
+export function getCenterData() {
+  return request({
+    url: `v1/traffic/predict/top2 `,
+    method: 'get'
+  })
+}

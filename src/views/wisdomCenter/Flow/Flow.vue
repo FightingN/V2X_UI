@@ -26,17 +26,48 @@
 <script>
 import { chartOptionPie, chartOptionPie2 } from './option.js'
 import { debounce } from 'utils/common'
+import { getCenterData } from 'api/leftApi.js'
 
 export default {
   name: 'Flow',
   data () {
     return {
-      interval: null
+      interval: null,
+      flowData: [
+        {
+          recRoadSectionName: '上虞互通_牟山互通_杭州方向',
+          trafficFlow: '6000', // 未来车流量的字段
+          data: [
+            {
+              nums: 100,
+              recTime: '2021-07-27 16:00:00'
+            },
+            {
+              nums: 100,
+              recTime: '2021-07-27 18:00:00'
+            }
+          ]
+        },
+        {
+          recRoadSectionName: '牟山互通_余姚西枢纽_宁波方向',
+          trafficFlow: '6000', // 未来车流量的字段
+          data: [
+            {
+              nums: 100,
+              recTime: '2021-07-27 16:00:00'
+            },
+            {
+              nums: 100,
+              recTime: '2021-07-27 18:00:00'
+            }
+          ]
+        }
+      ]
     }
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
-
+    this.getCenterData()
     if (this.interval) {
       clearInterval(this.interval)
     }
@@ -64,6 +95,10 @@ export default {
       if (this.myChartBar2) {
         this.myChartBar2.resize()
       }
+    },
+    async getCenterData () {
+      const res = await getCenterData()
+      console.log('预测流量', res)
     }
   }
 }

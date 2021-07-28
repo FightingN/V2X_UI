@@ -28,7 +28,7 @@ export default {
         res.data.forEach(item => {
           this.mapData.push({
             lnglat: item.shape,
-            flow: Math.random() * 1000
+            flow: item.flow
           })
         })
       } catch (err) {
@@ -56,8 +56,9 @@ export default {
       ]
       var polyline
       this.mapData.forEach(item => {
-        console.log('1', item.flow)
+        console.log('1', typeof item.flow)
         if (item.flow < 300) {
+          console.log('小于300绿色', item.flow)
           polyline = new AMap.Polyline({
             path: item.lnglat,
             isOutline: true,
@@ -75,6 +76,7 @@ export default {
             zIndex: 5
           })
         } else if (item.flow > 300 && item.flow < 500) {
+          console.log('小于500黄色', item.flow)
           polyline = new AMap.Polyline({
             path: item.lnglat,
             isOutline: true,
@@ -92,6 +94,7 @@ export default {
             zIndex: 5
           })
         } else {
+          console.log('大于500', item.flow)
           polyline = new AMap.Polyline({
             path: item.lnglat,
             isOutline: true,
