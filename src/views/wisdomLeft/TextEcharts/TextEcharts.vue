@@ -13,9 +13,10 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
 import { chartOptionPie } from './option.js'
 import { debounce } from 'utils/common'
-import { getCoreData } from 'api/leftApi.js'
+// import { getCoreData } from 'api/leftApi.js'
 export default {
   name: 'TextEcharts',
   data () {
@@ -25,15 +26,27 @@ export default {
       echartsData: []
     }
   },
+  watch: {
+    coreData: {
+      deep: true,
+      handler: function (val) {
+        this.getCoreData()
+      },
+      immediate: true
+    }
+  },
+  computed: {
+    ...mapGetters(['coreData'])
+  },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
-    this.getCoreData()
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-    this.interval = setInterval(() => {
-      this.getCoreData()
-    }, 1000 * 60)
+    // this.getCoreData()
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getCoreData()
+    // }, 1000 * 60)
   },
   methods: {
     chartManageBarMethod (myChart) {
@@ -46,15 +59,29 @@ export default {
         this.myChartBar.resize()
       }
     },
-    async getCoreData () {
-      const res = await getCoreData(this.roadName)
+    getCoreData () {
       this.echartsData = [
-        { value: res.data.numsYellCar, name: '黄牌流量' },
-        { value: res.data.numsBlueCar, name: '蓝牌流量' },
-        { value: res.data.numsYellCar + res.data.numsBlueCar, name: '总计' }
+        { value: this.coreData.numsYellCar, name: '黄牌流量' },
+        { value: this.coreData.numsBlueCar, name: '蓝牌流量' },
+        {
+          value: this.coreData.numsYellCar + this.coreData.numsBlueCar,
+          name: '总计'
+        }
       ]
-      this.myChartBar.setOption(chartOptionPie(this.echartsData))
+      if (this.myChartBar) {
+        console.log('getCoreData', this.myChartBar)
+        this.myChartBar.setOption(chartOptionPie(this.echartsData))
+      }
     }
+    // async getCoreData () {
+    //   const res = await getCoreData(this.roadName)
+    //   this.echartsData = [
+    //     { value: res.data.numsYellCar, name: '黄牌流量' },
+    //     { value: res.data.numsBlueCar, name: '蓝牌流量' },
+    //     { value: res.data.numsYellCar + res.data.numsBlueCar, name: '总计' }
+    //   ]
+    //   this.myChartBar.setOption(chartOptionPie(this.echartsData))
+    // }
   }
 }
 </script>

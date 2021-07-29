@@ -2,7 +2,6 @@
   <div class="service-level">
     <div class="title">
       <span>服务水平 {{ serviceLevel }}级</span>
-      <!-- <span class="right">拥堵路段占比：10%</span> -->
     </div>
     <div class="content">
       <wisdom-echarts-frame
@@ -16,7 +15,8 @@
 <script>
 import { debounce } from 'utils/common'
 import { chartOptionPie } from './option.js'
-import { getCoreData } from 'api/leftApi.js'
+import { mapGetters } from 'vuex'
+// import { getCoreData } from 'api/leftApi.js'
 export default {
   name: 'ServiceLevel',
   data () {
@@ -27,15 +27,27 @@ export default {
       serviceLevel: ''
     }
   },
+  watch: {
+    coreData: {
+      deep: true,
+      handler: function (val) {
+        this.getCoreData()
+      },
+      immediate: true
+    }
+  },
+  computed: {
+    ...mapGetters(['coreData'])
+  },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
-    this.getCoreData()
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-    this.interval = setInterval(() => {
-      this.getCoreData()
-    }, 1000 * 60)
+    // this.getCoreData()
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getCoreData()
+    // }, 1000 * 60)
   },
   methods: {
     chartManageBarMethod (myChart) {
@@ -48,12 +60,22 @@ export default {
         this.myChartBar.resize()
       }
     },
-    async getCoreData () {
-      const res = await getCoreData(this.roadName)
-      this.echartsData = [res.data.cartMixRate * 100, res.data.avgSpeed]
-      this.myChartBar.setOption(chartOptionPie(this.echartsData))
-      this.serviceLevel = res.data.serviceLevel
+    getCoreData () {
+      this.echartsData = [
+        this.coreData.cartMixRate * 100,
+        this.coreData.avgSpeed
+      ]
+      if (this.myChartBar) {
+        this.myChartBar.setOption(chartOptionPie(this.echartsData))
+      }
+      this.serviceLevel = this.coreData.serviceLevel
     }
+    // async getCoreData () {
+    //   const res = await getCoreData(this.roadName)
+    //   this.echartsData = [res.data.cartMixRate * 100, res.data.avgSpeed]
+    //   this.myChartBar.setOption(chartOptionPie(this.echartsData))
+    //   this.serviceLevel = res.data.serviceLevel
+    // }
   }
 }
 </script>

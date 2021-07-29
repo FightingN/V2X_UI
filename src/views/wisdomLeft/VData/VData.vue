@@ -27,7 +27,8 @@
 </template>
 
 <script>
-import { getCoreData } from 'api/leftApi.js'
+// import { getCoreData } from 'api/leftApi.js'
+import { mapGetters } from 'vuex'
 
 export default {
   name: 'index',
@@ -42,25 +43,44 @@ export default {
       carType: ''
     }
   },
-  mounted () {
-    this.getCoreData()
-    if (this.interval) {
-      clearInterval(this.interval)
+  watch: {
+    coreData: {
+      deep: true,
+      handler: function (val) {
+        this.getCoreData()
+      },
+      immediate: true
     }
-    this.interval = setInterval(() => {
-      this.getCoreData()
-    }, 1000 * 60)
+  },
+  computed: {
+    ...mapGetters(['coreData'])
+  },
+  mounted () {
+    // this.getCoreData()
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getCoreData()
+    // }, 1000 * 60)
   },
   methods: {
-    async getCoreData () {
-      const res = await getCoreData(this.roadName)
-      console.log('v2x车辆数据', res)
-      this.v2xAvgSpeed = res.data.v2xAvgSpeed
-      this.v2Xcls = res.data.v2Xcls
-      this.v2xDrivenDistance = res.data.v2xDrivenDistance
-      this.carId = res.data.id
-      this.carType = res.data.carType
+    getCoreData () {
+      this.v2xAvgSpeed = this.coreData.v2xAvgSpeed
+      this.v2Xcls = this.coreData.v2Xcls
+      this.v2xDrivenDistance = this.coreData.v2xDrivenDistance
+      this.carId = this.coreData.id
+      this.carType = this.coreData.carType
     }
+    // async getCoreData () {
+    //   const res = await getCoreData(this.roadName)
+    //   console.log('v2x车辆数据', res)
+    //   this.v2xAvgSpeed = res.data.v2xAvgSpeed
+    //   this.v2Xcls = res.data.v2Xcls
+    //   this.v2xDrivenDistance = res.data.v2xDrivenDistance
+    //   this.carId = res.data.id
+    //   this.carType = res.data.carType
+    // }
   }
 }
 </script>

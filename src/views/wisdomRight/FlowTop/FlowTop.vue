@@ -38,9 +38,9 @@ export default {
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
     // this.interval = setInterval(() => {
     //   this.resizeEcharts()
     //   this.myChartBar.setOption(chartOptionPie())

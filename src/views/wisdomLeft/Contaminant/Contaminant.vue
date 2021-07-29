@@ -21,7 +21,8 @@
 <script>
 import { chartOptionPie, chartOptionPie2 } from './option.js'
 import { debounce } from 'utils/common'
-import { getCoreData } from 'api/leftApi.js'
+import { mapGetters } from 'vuex'
+// import { getCoreData } from 'api/leftApi.js'
 
 export default {
   name: 'Contaminant',
@@ -35,15 +36,27 @@ export default {
       data2: 0
     }
   },
+  watch: {
+    coreData: {
+      deep: true,
+      handler: function (val) {
+        this.getCoreData()
+      },
+      immediate: true
+    }
+  },
+  computed: {
+    ...mapGetters(['coreData'])
+  },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-    this.getCoreData()
-    this.interval = setInterval(() => {
-      this.getCoreData()
-    }, 1000 * 60)
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.getCoreData()
+    // this.interval = setInterval(() => {
+    //   this.getCoreData()
+    // }, 1000 * 60)
   },
   methods: {
     chartManageBarMethod (myChart) {
@@ -64,13 +77,23 @@ export default {
         this.myChartBar2.resize()
       }
     },
-    async getCoreData () {
-      const res = await getCoreData(this.roadName)
-      this.data1 = res.data.inhalableEmissions
-      this.data2 = res.data.noxEmissions
-      this.myChartBar.setOption(chartOptionPie(this.data1))
-      this.myChartBar2.setOption(chartOptionPie2(this.data2))
+    getCoreData () {
+      this.data1 = this.coreData.inhalableEmissions
+      this.data2 = this.coreData.noxEmissions
+      if (this.myChartBar) {
+        this.myChartBar.setOption(chartOptionPie(this.data1))
+      }
+      if (this.myChartBar2) {
+        this.myChartBar2.setOption(chartOptionPie2(this.data2))
+      }
     }
+    // async getCoreData () {
+    //   const res = await getCoreData(this.roadName)
+    //   this.data1 = res.data.inhalableEmissions
+    //   this.data2 = res.data.noxEmissions
+    //   this.myChartBar.setOption(chartOptionPie(this.data1))
+    //   this.myChartBar2.setOption(chartOptionPie2(this.data2))
+    // }
   }
 }
 </script>

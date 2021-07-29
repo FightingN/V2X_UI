@@ -80,12 +80,12 @@ export default {
     }
   },
   mounted () {
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-    this.interval = setInterval(() => {
-      this.getEchartsData()
-    }, 1000 * 60 * 5)
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getEchartsData()
+    // }, 1000 * 60 * 5)
     this.getEchartsData()
   },
   methods: {

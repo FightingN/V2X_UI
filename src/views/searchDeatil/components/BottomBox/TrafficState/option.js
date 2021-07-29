@@ -109,7 +109,7 @@ export function chartOptionPie(dataLine) {
               } else if (data.dataIndex == 1) {
                 return dataLine[data.dataIndex] + 'km/h'
               } else if (data.dataIndex == 2) {
-                return dataLine[data.dataIndex] + 's'
+                return dataLine[data.dataIndex] + '%'
               }
             },
             textStyle: {

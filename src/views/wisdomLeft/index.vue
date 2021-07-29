@@ -7,10 +7,12 @@
   </div>
 </template>
 <script>
+import { mapGetters, mapActions } from 'vuex'
 import TextEcharts from './TextEcharts/TextEcharts'
 import ServiceLevel from './ServiceLevel/ServiceLevel'
 import VData from './VData/VData'
 import Contaminant from './Contaminant/Contaminant'
+import { getCoreData } from 'api/leftApi.js'
 export default {
   components: {
     TextEcharts,
@@ -20,7 +22,31 @@ export default {
   },
   data () {
     return {
-      name: 'wisdomLeft'
+      name: 'wisdomLeft',
+      roadName: '路网',
+      interval: null
+    }
+  },
+  computed: {
+    ...mapGetters(['coreData'])
+  },
+  mounted () {
+    this.getCoreData()
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getCoreData()
+    // }, 1000)
+  },
+  methods: {
+    ...mapActions({
+      set_coreData: 'SET_COREDATA'
+    }),
+    async getCoreData () {
+      const res = await getCoreData(this.roadName)
+      this.set_coreData(res.data)
+      console.log('store', this.coreData)
     }
   }
 }

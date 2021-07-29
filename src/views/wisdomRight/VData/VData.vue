@@ -50,12 +50,12 @@ export default {
   },
   mounted () {
     this.getService()
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-    this.interval = setInterval(() => {
-      this.getService()
-    }, 1000 * 60 * 10)
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getService()
+    // }, 1000 * 60 * 10)
   },
   methods: {
     async getService () {
