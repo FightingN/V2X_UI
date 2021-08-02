@@ -6,8 +6,8 @@
         <screen-table
           :headerData="headerList"
           :tableContent="measureData"
-          :ava="1"
-          :tableContentAva="3"
+          :ava="2"
+          :tableContentAva="1"
         ></screen-table>
       </template>
       <template v-else>
@@ -37,8 +37,10 @@ export default {
         this.measureData = []
       }
       const res = await getServiceTodo(this.roadName)
+      console.log('管控措施', res)
       res.data.forEach(item => {
         this.measureData.push({
+          recRoadSectionName: item.recRoadSectionName,
           needTodo: item.needTodo
         })
       })
@@ -77,6 +79,11 @@ export default {
     }
     /deep/ .screenTable .table-body .scroll-view .tableContent {
       border: none;
+    }
+    /deep/ .screenTable .tableContent div {
+      overflow: auto !important;
+      white-space: pre-wrap !important;
+      text-overflow: clip !important;
     }
   }
 }
