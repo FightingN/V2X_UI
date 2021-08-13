@@ -48,7 +48,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .traffic-state {
-  width: 32%;
+  width: 49%;
   height: 100%;
   box-shadow: 0 0 10px 5px #eee;
   padding: 0.125rem;

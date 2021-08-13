@@ -1,0 +1,48 @@
+{
+  "code": 200,
+  "message": "Success",
+  "data": [{
+      // 第一个对象是左侧数据
+      "listData": [{
+          "nums": 100,
+          "recTime": "09:00"
+        },
+        {
+          "nums": 100,
+          "recTime": "10:00"
+        },
+        {
+          "nums": 100,
+          "recTime": "11:00"
+        },
+        {
+          "nums": 100,
+          "recTime": "12:00"
+        }
+      ]
+    },
+    {
+      // 第二个对象是右侧数据
+      "listData": [{
+          "nums": 100,
+          "recTime": "09:00"
+        },
+        {
+          "nums": 100,
+          "recTime": "10:00"
+        },
+        {
+          "nums": 100,
+          "recTime": "11:00"
+        },
+        {
+          "nums": 100,
+          "recTime": "12:00"
+        }
+      ]
+
+    }
+  ]
+}
+//  get 请求
+// 接口地址------》  v1/traffic/predict/top2?roadName='XXXX高速方向'

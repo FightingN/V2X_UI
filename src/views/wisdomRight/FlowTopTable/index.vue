@@ -1,16 +1,7 @@
 <template>
   <div class="v-data border">
-    <div class="title title-style">态势预警</div>
+    <div class="title title-style">实时路段交通流量Top</div>
     <div class="content">
-      <!-- <template v-if="itemData.length > 0">
-        <div class="item" v-for="(item, index) in itemData" :key="index">
-          <span>{{ item.recRoadSectionName }}</span>
-          <span class="span2">{{ item.numsRate }}辆/10分钟</span>
-        </div>
-      </template>
-      <template v-else>
-        <div class="no-data">暂无数据~</div>
-      </template> -->
       <template v-if="itemData.length > 0">
         <screen-table
           :headerData="headerList"
@@ -27,38 +18,82 @@
 </template>
 
 <script>
-import { getSituation } from 'api/wisdomRight.js'
+import { getTopRate } from 'api/wisdomRight.js'
 
 export default {
-  name: 'index',
+  name: 'flow-top-table',
   data () {
     return {
       roadName: '路网',
       itemData: [],
       interval: null,
       headerList: []
+      // data: [
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   },
+      //   {
+      //     roadSectionName: '红垦枢纽_机场互通_杭州方向',
+      //     numsBlueCar: 0,
+      //     numsYellCar: 1
+      //   }
+      // ]
     }
   },
   mounted () {
-    this.getSituation()
+    this.getTopRate()
     if (this.interval) {
       clearInterval(this.interval)
     }
     this.interval = setInterval(() => {
-      this.getSituation()
-    }, 1000 * 60 * 10)
+      this.getTopRate()
+    }, 1000 * 10)
   },
   methods: {
-    async getSituation () {
-      console.log('态势预警--10分钟更新')
+    async getTopRate () {
+      console.log('实时路段交通流量Top---10秒更新')
       if (this.itemData.length > 0) {
         this.itemData = []
       }
-      const res = await getSituation()
+      const res = await getTopRate()
+      console.log('Top', res)
+      // res.data = this.data
       res.data.forEach(item => {
         this.itemData.push({
-          recRoadSectionName: item.recRoadSectionName,
-          numsRate: item.numsRate + '辆/10分钟'
+          recRoadSectionName: item.roadSectionName,
+          numsRate: item.numsBlueCar + item.numsYellCar + '辆'
         })
       })
     }
@@ -68,7 +103,7 @@ export default {
 <style lang="scss" scoped>
 .v-data {
   box-sizing: border-box;
-  height: 26%;
+  height: 23.5%;
   width: 100%;
   background-color: #0c1427;
   padding: 0.0625rem;

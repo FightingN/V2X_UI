@@ -60,6 +60,7 @@ export default {
       }
     },
     getCoreData () {
+      console.log('G92高速交通流量10秒更新')
       this.echartsData = [
         { value: this.coreData.numsYellCar, name: '黄牌流量' },
         { value: this.coreData.numsBlueCar, name: '蓝牌流量' },
@@ -69,7 +70,6 @@ export default {
         }
       ]
       if (this.myChartBar) {
-        console.log('getCoreData', this.myChartBar)
         this.myChartBar.setOption(chartOptionPie(this.echartsData))
       }
     }

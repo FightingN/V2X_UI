@@ -2,7 +2,8 @@
   <div class="wisdom-left">
     <text-echarts></text-echarts>
     <service-level></service-level>
-    <V-Data></V-Data>
+    <!-- <V-Data></V-Data> -->
+    <service-data></service-data>
     <Contaminant />
   </div>
 </template>
@@ -10,14 +11,16 @@
 import { mapGetters, mapActions } from 'vuex'
 import TextEcharts from './TextEcharts/TextEcharts'
 import ServiceLevel from './ServiceLevel/ServiceLevel'
-import VData from './VData/VData'
+// import VData from './VData/VData'
+import ServiceData from './serviceData'
 import Contaminant from './Contaminant/Contaminant'
 import { getCoreData } from 'api/leftApi.js'
 export default {
   components: {
     TextEcharts,
     ServiceLevel,
-    VData,
+    // VData,
+    ServiceData,
     Contaminant
   },
   data () {
@@ -32,12 +35,13 @@ export default {
   },
   mounted () {
     this.getCoreData()
-    // if (this.interval) {
-    //   clearInterval(this.interval)
-    // }
-    // this.interval = setInterval(() => {
-    //   this.getCoreData()
-    // }, 1000)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.interval = setInterval(() => {
+      this.getCoreData()
+      // 10秒更新
+    }, 1000 * 10)
   },
   methods: {
     ...mapActions({
@@ -46,7 +50,6 @@ export default {
     async getCoreData () {
       const res = await getCoreData(this.roadName)
       this.set_coreData(res.data)
-      console.log('store', this.coreData)
     }
   }
 }

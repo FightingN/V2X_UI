@@ -1,19 +1,21 @@
 <template>
   <div class="flow">
+    <div class="select-box">
+      <screen-dropdown-menu
+        :menuList="menuList"
+        @onChooseItem="onChooseItem"
+      ></screen-dropdown-menu>
+    </div>
     <div class="echarts">
       <div class="div">
-        <div class="title">
-          G92_红垦枢纽-机场互通_杭州方向未来10分钟交通流量：6000辆
-        </div>
+        <div class="title">{{ roadName }} 实际值</div>
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod"
           ref="chartManageBar"
         ></wisdom-echarts-frame>
       </div>
       <div class="div">
-        <div class="title">
-          G92_瓜沥互通-柯桥互通_杭州方向未来10分钟交通流量：7000辆
-        </div>
+        <div class="title">{{ roadName }} 预测值</div>
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod2"
           ref="chartManageBar"
@@ -27,6 +29,7 @@
 import { chartOptionPie, chartOptionPie2 } from './option.js'
 import { debounce } from 'utils/common'
 import { getCenterData } from 'api/leftApi.js'
+import { getRoads } from 'api/wisdomRight.js'
 
 export default {
   name: 'Flow',
@@ -35,58 +38,75 @@ export default {
       interval: null,
       flowData: [
         {
-          recRoadSectionName: '上虞互通_牟山互通_杭州方向',
-          trafficFlow: '6000', // 未来车流量的字段
-          data: [
+          //  第一个对象是左侧数据
+          listData: [
             {
               nums: 100,
-              recTime: '2021-07-27 16:00:00'
+              recTime: '08:00'
             },
             {
-              nums: 100,
-              recTime: '2021-07-27 18:00:00'
+              nums: 170,
+              recTime: '09:00'
+            },
+            {
+              nums: 120,
+              recTime: '10:00'
+            },
+            {
+              nums: 270,
+              recTime: '11:00'
             }
           ]
         },
         {
-          recRoadSectionName: '牟山互通_余姚西枢纽_宁波方向',
-          trafficFlow: '6000', // 未来车流量的字段
-          data: [
+          // 第二个对象是右侧数据
+          listData: [
             {
               nums: 100,
-              recTime: '2021-07-27 16:00:00'
+              recTime: '08:00'
             },
             {
-              nums: 100,
-              recTime: '2021-07-27 18:00:00'
+              nums: 170,
+              recTime: '09:00'
+            },
+            {
+              nums: 120,
+              recTime: '10:00'
+            },
+            {
+              nums: 270,
+              recTime: '11:00'
             }
           ]
         }
-      ]
+      ],
+      menuList: [],
+      roadName: '',
+      leftXData: [],
+      leftYData: [],
+      rightXData: [],
+      rightYData: []
     }
   },
   mounted () {
+    this.getRoads()
     window.addEventListener('resize', debounce(this.resizeEcharts))
     this.getCenterData()
-    // if (this.interval) {
-    //   clearInterval(this.interval)
-    // }
-    // this.interval = setInterval(() => {
-    //   this.resizeEcharts()
-    //   this.myChartBar.setOption(chartOptionPie())
-    //   this.myChartBar2.setOption(chartOptionPie2())
-    // }, 1000 * 60 * 10)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.interval = setInterval(() => {
+      this.getCenterData()
+    }, 1000 * 60 * 10)
   },
   methods: {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie())
     },
     chartManageBarMethod2 (myChart) {
       this.myChartBar2 = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar2.setOption(chartOptionPie2())
     },
     resizeEcharts () {
       if (this.myChartBar) {
@@ -97,8 +117,74 @@ export default {
       }
     },
     async getCenterData () {
-      const res = await getCenterData()
+      console.log('预测流量----10分钟更新一次')
+      const res = await getCenterData(this.roadName)
       console.log('预测流量', res)
+      if (
+        this.leftXData.length > 0 ||
+        this.rightXData.length > 0 ||
+        this.leftYData.length > 0 ||
+        this.rightYData.length > 0
+      ) {
+        this.leftXData = []
+        this.leftYData = []
+        this.rightXData = []
+        this.rightYData = []
+      }
+      res.data = this.flowData
+      const leftXData = []
+      const leftYData = []
+      const rightXData = []
+      const rightYData = []
+      res.data.forEach((item, index) => {
+        console.log('item', item)
+        if (index == 0) {
+          // 左侧数据
+          item.listData.forEach(value => {
+            leftXData.push(value.recTime)
+            leftYData.push(value.nums)
+          })
+        } else if (index == 1) {
+          // 右侧数据
+          item.listData.forEach(value => {
+            rightXData.push(value.recTime)
+            rightYData.push(value.nums)
+          })
+        }
+        this.leftXData = leftXData
+        this.leftYData = leftYData
+        this.rightXData = rightXData
+        this.rightYData = rightYData
+      })
+      // 接口请求完再调用echats
+      this.myChartBar.setOption(chartOptionPie(this.leftXData, this.leftYData))
+      this.myChartBar2.setOption(
+        chartOptionPie2(this.rightXData, this.rightYData)
+      )
+    },
+    onChooseItem (value) {
+      this.roadName = value.label
+    },
+    async getRoads () {
+      try {
+        const res = await getRoads()
+        res.data.forEach((item, index) => {
+          if (index == 0) {
+            this.menuList.push({
+              label: item,
+              select: true,
+              value: index
+            })
+          } else {
+            this.menuList.push({
+              label: item,
+              select: false,
+              value: index
+            })
+          }
+        })
+        this.roadName = this.menuList[0].label
+      } catch (error) {}
     }
   }
 }
@@ -115,7 +201,7 @@ export default {
   bottom: 0%;
   .echarts {
     width: 100%;
-    height: 100%;
+    height: 80%;
     display: flex;
     .div {
       width: 50%;
@@ -127,5 +213,13 @@ export default {
       }
     }
   }
+  .select-box {
+    padding-left: 30%;
+    height: 20%;
+    width: 40%;
+  }
+}
+/deep/ .screen-dropdown-menu-list {
+  height: 160px !important;
 }
 </style>

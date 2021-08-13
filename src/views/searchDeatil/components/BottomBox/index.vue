@@ -2,14 +2,14 @@
   <div class="bottom-box">
     <traffic-state :dataLine="dataLine"></traffic-state>
     <traffic-flow :flowData="flowData"></traffic-flow>
-    <car-info :infoData="infoData"></car-info>
+    <!-- <car-info :infoData="infoData"></car-info> -->
   </div>
 </template>
 
 <script>
 import TrafficState from './TrafficState/index'
 import TrafficFlow from './TrafficFlow/index'
-import CarInfo from './CarInfo/index'
+// import CarInfo from './CarInfo/index'
 export default {
   name: 'BottomBox',
   props: {
@@ -28,7 +28,7 @@ export default {
   },
   components: {
     TrafficState,
-    CarInfo,
+    // CarInfo,
     TrafficFlow
   },
   data () {

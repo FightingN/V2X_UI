@@ -7,7 +7,7 @@
           :headerData="headerList"
           :tableContent="measureData"
           :ava="2"
-          :tableContentAva="1"
+          :tableContentAva="4"
         ></screen-table>
       </template>
       <template v-else>
@@ -25,7 +25,37 @@ export default {
     return {
       roadName: '路网',
       measureData: [],
-      headerList: []
+      headerList: [],
+      data: [
+        {
+          needTodo: '建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        },
+        {
+          needTodo: '建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        },
+        {
+          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        },
+        {
+          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        },
+        {
+          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        },
+        {
+          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        },
+        {
+          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
+          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
+        }
+      ]
     }
   },
   mounted () {
@@ -38,6 +68,7 @@ export default {
       }
       const res = await getServiceTodo(this.roadName)
       console.log('管控措施', res)
+      res.data = this.data
       res.data.forEach(item => {
         this.measureData.push({
           recRoadSectionName: item.recRoadSectionName,
@@ -51,7 +82,7 @@ export default {
 <style lang="scss" scoped>
 .v-data {
   box-sizing: border-box;
-  height: 20%;
+  height: 40%;
   width: 100%;
   background-color: #0c1427;
   padding: 0.0625rem;

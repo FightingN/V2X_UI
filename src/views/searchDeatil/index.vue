@@ -80,17 +80,16 @@ export default {
     }
   },
   mounted () {
-    // if (this.interval) {
-    //   clearInterval(this.interval)
-    // }
-    // this.interval = setInterval(() => {
-    //   this.getEchartsData()
-    // }, 1000 * 60 * 5)
+    if (this.interval) {
+      clearInterval(this.interval)
+    }
+    this.interval = setInterval(() => {
+      this.getEchartsData()
+    }, 1000 * 10)
     this.getEchartsData()
   },
   methods: {
     async onExcelPicker () {
-      console.log('111111', this.value1, this.roadname)
       if (this.value1 == '') {
         this.$message({
           message: '请选择导出时间范围',
@@ -127,9 +126,9 @@ export default {
       }
     },
     async onChangePicker (valueTime) {
-      const time = new Date(valueTime)
       console.log('valueTime', valueTime)
       console.log('time', time)
+      const time = new Date(valueTime)
       const t = time.getTime(time)
       const params = {
         roadname: this.roadname,
@@ -147,6 +146,7 @@ export default {
       })
     },
     async getEchartsData () {
+      console.log('二级页面指标10秒更新一次')
       try {
         const res = await getEchartsData(this.roadname)
         if (res.code == '500') {

@@ -78,6 +78,7 @@ export default {
       }
     },
     getCoreData () {
+      console.log('污染物排放----10秒更新')
       this.data1 = this.coreData.inhalableEmissions
       this.data2 = this.coreData.noxEmissions
       if (this.myChartBar) {

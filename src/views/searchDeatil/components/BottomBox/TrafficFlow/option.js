@@ -1,20 +1,53 @@
 export function chartOptionPie(flowData) {
+  var legend = ['黄牌流量', '蓝牌流量', '总计']
   return {
     tooltip: {
       trigger: 'item'
     },
+    // legend: {
+    //   orient: 'vertical',
+    //   top: '40%',
+    //   right: '5%',
+    //   bottom: '0',
+    //   textStyle: {
+    //     //图例文字的样式
+    //     color: '#73879c',
+    //     fontSize: 26
+    //   },
+    // },
     legend: {
       orient: 'vertical',
-      top: '40%',
-      right: '5%',
-      bottom: '0',
+      top: 'center',
+      right: 20,
       textStyle: {
-        //图例文字的样式
-        color: '#73879c',
-        fontSize: 26
+        align: 'left',
+        verticalAlign: 'middle',
+        rich: {
+          name: {
+            color: '#73879c',
+            fontSize: 26
+          },
+          value: {
+            color: '#73879c',
+            fontSize: 26
+          },
+          rate: {
+            color: '#73879c',
+            fontSize: 26
+          }
+        }
+      },
+      data: legend,
+      formatter: name => {
+        if (flowData.length) {
+          const item = flowData.filter(item => item.name === name)[0]
+          console.log('item', item)
+          // return `{name|${name}：}{value| ${item.value}} {rate| ${item.value}%}`
+          return `{name|${name}: }{value| ${item.value}} `
+        }
       }
     },
-    color: ['#b5954a', '#2b62bf', '#419aee'],
+    color: ['#f8d607', '#2b62bf', '#419aee'],
     series: [
       {
         name: '交通流量',

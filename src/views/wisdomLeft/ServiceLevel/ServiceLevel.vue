@@ -1,7 +1,7 @@
 <template>
   <div class="service-level">
     <div class="title">
-      <span>服务水平 {{ serviceLevel }}级</span>
+      <span>G92服务水平 {{ serviceLevel }}级</span>
     </div>
     <div class="content">
       <wisdom-echarts-frame
@@ -61,6 +61,7 @@ export default {
       }
     },
     getCoreData () {
+      console.log('G92服务水平--10秒更新')
       this.echartsData = [
         this.coreData.cartMixRate * 100,
         this.coreData.avgSpeed

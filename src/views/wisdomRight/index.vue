@@ -4,8 +4,9 @@
       :menuList="menuList"
       @onChooseItem="onChooseItem"
     ></screen-dropdown-menu>
-    <flow-top></flow-top>
-    <V-Data></V-Data>
+    <!-- <flow-top></flow-top> -->
+    <flow-top-table></flow-top-table>
+    <!-- <V-Data></V-Data> -->
     <control></control>
     <!-- <Contaminant /> -->
     <state></state>
@@ -13,8 +14,9 @@
 </template>
 <script>
 import { getRoads } from 'api/wisdomRight.js'
-import FlowTop from '@/views/wisdomRight/FlowTop/FlowTop'
-import VData from './VData/VData'
+// import FlowTop from '@/views/wisdomRight/FlowTop/FlowTop'
+import FlowTopTable from '@/views/wisdomRight/FlowTopTable'
+// import VData from './VData/VData'
 import Control from './Control/Control'
 import Contaminant from './Contaminant/Contaminant'
 import State from './State/State'
@@ -22,8 +24,9 @@ import searchInput from './searchInput/searchInput'
 
 export default {
   components: {
-    FlowTop,
-    VData,
+    // FlowTop,
+    FlowTopTable,
+    // VData,
     Control,
     Contaminant,
     State,

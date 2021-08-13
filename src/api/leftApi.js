@@ -7,9 +7,9 @@ export function getCoreData(roadName) {
   })
 }
 
-export function getCenterData() {
+export function getCenterData(roadName) {
   return request({
-    url: `v1/traffic/predict/top2 `,
+    url: `v1/traffic/predict/top2?roadName='${roadName}' `,
     method: 'get'
   })
 }

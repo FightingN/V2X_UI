@@ -1,20 +1,5 @@
-export function chartOptionPie() {
-  var data = [
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000)
-  ]
+export function chartOptionPie(leftXData, leftYData) {
   return {
-    // backgroundColor: 'rgba(0,0,0,.5)',
     grid: {
       left: '3%',
       bottom: '20%',
@@ -45,20 +30,7 @@ export function chartOptionPie() {
     xAxis: {
       type: 'category',
       boundaryGap: true,
-      data: [
-        '08:00',
-        '09:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '13:00',
-        '14:00',
-        '15:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00'
-      ],
+      data: leftXData,
       show: true,
       axisLabel: {
         // show: true,
@@ -107,7 +79,7 @@ export function chartOptionPie() {
         type: 'line',
         smooth: true,
         stack: '交通流量',
-        data,
+        data: leftYData,
         // data: [
         //   7000,
         //   6900,
@@ -129,23 +101,8 @@ export function chartOptionPie() {
     ]
   }
 }
-export function chartOptionPie2() {
-  var data = [
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000),
-    Math.floor(Math.random() * 1000)
-  ]
+export function chartOptionPie2(rightXData, rightYData) {
   return {
-    // backgroundColor: 'rgba(0,0,0,.5)',
     grid: {
       left: '3%',
       bottom: '20%',
@@ -176,20 +133,7 @@ export function chartOptionPie2() {
     xAxis: {
       type: 'category',
       boundaryGap: true,
-      data: [
-        '08:00',
-        '09:00',
-        '10:00',
-        '11:00',
-        '12:00',
-        '13:00',
-        '14:00',
-        '15:00',
-        '16:00',
-        '17:00',
-        '18:00',
-        '19:00'
-      ],
+      data: rightXData,
       show: true,
       axisLabel: {
         // show: true,
@@ -238,21 +182,7 @@ export function chartOptionPie2() {
         type: 'line',
         smooth: true,
         stack: '交通流量',
-        data,
-        // [
-        //   7000,
-        //   6900,
-        //   9500,
-        //   14500,
-        //   18400,
-        //   21500,
-        //   25200,
-        //   26500,
-        //   23300,
-        //   18300,
-        //   13900,
-        //   9600
-        // ],
+        data: rightYData,
         itemStyle: {
           normal: { color: 'rgba(41,138,231,0.9)' }
         }
