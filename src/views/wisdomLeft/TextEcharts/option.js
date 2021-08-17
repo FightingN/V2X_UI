@@ -46,7 +46,7 @@ export function chartOptionPie(data) {
       formatter: name => {
         if (data.length) {
           const item = data.filter(item => item.name === name)[0]
-          console.log('item', item)
+          // console.log('item', item)
           // return `{name|${name}：}{value| ${item.value}} {rate| ${item.value}%}`
           return `{name|${name}: }{value| ${item.value}} `
         }

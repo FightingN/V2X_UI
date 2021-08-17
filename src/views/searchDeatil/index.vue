@@ -49,7 +49,8 @@
 import {
   getEchartsData,
   getTimeData,
-  getExportExcel
+  getExportExcel,
+  getDayData
 } from 'api/searchDeatil.js'
 import CenterBox from './components/CenterBox'
 import TopBox from './components/TopBox'
@@ -80,12 +81,12 @@ export default {
     }
   },
   mounted () {
-    if (this.interval) {
-      clearInterval(this.interval)
-    }
-    this.interval = setInterval(() => {
-      this.getEchartsData()
-    }, 1000 * 10)
+    // if (this.interval) {
+    //   clearInterval(this.interval)
+    // }
+    // this.interval = setInterval(() => {
+    //   this.getEchartsData()
+    // }, 1000 * 10)
     this.getEchartsData()
   },
   methods: {
@@ -128,14 +129,19 @@ export default {
     async onChangePicker (valueTime) {
       console.log('valueTime', valueTime)
       console.log('time', time)
+      if (this.oxideXdata.length > 0 || this.carNum.length > 0) {
+        this.carNum = []
+        this.oxideXdata = []
+      }
       const time = new Date(valueTime)
       const t = time.getTime(time)
       const params = {
         roadname: this.roadname,
-        startTimeStamp: (t / (24 * 60 * 60 * 1000)) * (24 * 60 * 60 * 1000),
-        endTimeStamp: (t / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000)
+        day: valueTime
+        // startTimeStamp: (t / (24 * 60 * 60 * 1000)) * (24 * 60 * 60 * 1000),
+        // endTimeStamp: (t / (24 * 60 * 60 * 1000) + 1) * (24 * 60 * 60 * 1000)
       }
-      const res = await getTimeData(params)
+      const res = await getDayData(params)
       this.oxideXdata = []
       this.carNum = []
       res.data.forEach((item, index) => {
@@ -147,6 +153,10 @@ export default {
     },
     async getEchartsData () {
       console.log('二级页面指标10秒更新一次')
+      if (this.oxideXdata.length > 0 || this.carNum.length > 0) {
+        this.carNum = []
+        this.oxideXdata = []
+      }
       try {
         const res = await getEchartsData(this.roadname)
         if (res.code == '500') {

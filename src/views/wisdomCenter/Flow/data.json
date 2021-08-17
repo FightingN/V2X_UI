@@ -46,3 +46,20 @@
 }
 //  get 请求
 // 接口地址------》  v1/traffic/predict/top2?roadName='XXXX高速方向'
+{
+  "roadSectionName": "红垦枢纽_机场互通_杭州方向2",
+  "avgSpeed": 10.0,
+  "situationPrediction": 12.0,
+  "congestionLength": 100,
+  "numsBlueCar": 10,
+  "numsYellCar": 30,
+  "avgHeadway": 10.0,
+  "serviceLevel": "A",
+  "carbonMonoxideEmissions": 10.0,
+  "inhalableEmissions": 20.0,
+  "noxEmissions": 20.0,
+  "meausreInfo": "建议开慢点",
+  "totalCars": 40,
+  "predictTotalCars": 50,
+  "recTime": "2021-08-14T19:45:00"
+}

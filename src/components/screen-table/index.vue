@@ -274,7 +274,7 @@ export default {
   .header {
     height: var(--headerHeightAva);
     display: flex;
-    font-size: 15px;
+    font-size: 18px;
     color: #2a70e1;
     text-align: center;
     div {
@@ -299,7 +299,7 @@ export default {
     height: calc(100% / var(--tableContentAva));
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 16px;
     color: #fff;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.26);

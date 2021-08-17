@@ -8,18 +8,18 @@
           ref="chartManageBar"
         ></wisdom-echarts-frame>
       </div>
-      <div class="div">
+      <!-- <div class="div">
         <wisdom-echarts-frame
           @myChartMethod="chartManageBarMethod2"
           ref="chartManageBar"
         ></wisdom-echarts-frame>
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
 
 <script>
-import { chartOptionPie, chartOptionPie2 } from './option.js'
+import { chartOptionPie, chartOptionPie2, getAvaChartOption } from './option.js'
 import { debounce } from 'utils/common'
 import { mapGetters } from 'vuex'
 // import { getCoreData } from 'api/leftApi.js'
@@ -30,10 +30,15 @@ export default {
     return {
       roadName: '路网',
       interval: null,
-      // 可摄入数据
-      data1: 0,
-      // 氮氧化物排放物
-      data2: 0
+      // // 可摄入数据
+      // data1: 0,
+      // // 氮氧化物排放物
+      // data2: 0,
+      dataList: [
+        { value: 10, name: '可吸入颗粒排放量' },
+        { value: 20, name: '氮氧化物排放量' }
+      ],
+      total: 0
     }
   },
   watch: {
@@ -50,51 +55,38 @@ export default {
   },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
-    // if (this.interval) {
-    //   clearInterval(this.interval)
-    // }
-    // this.getCoreData()
-    // this.interval = setInterval(() => {
-    //   this.getCoreData()
-    // }, 1000 * 60)
   },
   methods: {
     chartManageBarMethod (myChart) {
       this.myChartBar = myChart
       this.$refs.chartManageBar.clear()
-      this.myChartBar.setOption(chartOptionPie(this.data1))
+      // this.myChartBar.setOption(chartOptionPie(this.data1))
     },
-    chartManageBarMethod2 (myChart) {
-      this.myChartBar2 = myChart
-      this.$refs.chartManageBar.clear()
-      this.myChartBar2.setOption(chartOptionPie2(this.data2))
-    },
+    // chartManageBarMethod2 (myChart) {
+    //   this.myChartBar2 = myChart
+    //   this.$refs.chartManageBar.clear()
+    //   // this.myChartBar2.setOption(chartOptionPie2(this.data2))
+    // },
     resizeEcharts () {
       if (this.myChartBar) {
         this.myChartBar.resize()
       }
-      if (this.myChartBar2) {
-        this.myChartBar2.resize()
-      }
+      // if (this.myChartBar2) {
+      //   this.myChartBar2.resize()
+      // }
     },
     getCoreData () {
       console.log('污染物排放----10秒更新')
       this.data1 = this.coreData.inhalableEmissions
       this.data2 = this.coreData.noxEmissions
       if (this.myChartBar) {
-        this.myChartBar.setOption(chartOptionPie(this.data1))
+        this.myChartBar.setOption(getAvaChartOption(this.dataList))
+        // this.myChartBar.setOption(chartOptionPie(this.data1))
       }
-      if (this.myChartBar2) {
-        this.myChartBar2.setOption(chartOptionPie2(this.data2))
-      }
+      // if (this.myChartBar2) {
+      //   this.myChartBar2.setOption(chartOptionPie2(this.data2))
+      // }
     }
-    // async getCoreData () {
-    //   const res = await getCoreData(this.roadName)
-    //   this.data1 = res.data.inhalableEmissions
-    //   this.data2 = res.data.noxEmissions
-    //   this.myChartBar.setOption(chartOptionPie(this.data1))
-    //   this.myChartBar2.setOption(chartOptionPie2(this.data2))
-    // }
   }
 }
 </script>
@@ -113,7 +105,7 @@ export default {
     height: 90%;
     display: flex;
     .div {
-      width: 50%;
+      width: 100%;
       height: 100%;
     }
   }

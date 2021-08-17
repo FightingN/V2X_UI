@@ -36,50 +36,44 @@ export default {
   data () {
     return {
       interval: null,
-      flowData: [
-        {
-          //  第一个对象是左侧数据
-          listData: [
-            {
-              nums: 100,
-              recTime: '08:00'
-            },
-            {
-              nums: 170,
-              recTime: '09:00'
-            },
-            {
-              nums: 120,
-              recTime: '10:00'
-            },
-            {
-              nums: 270,
-              recTime: '11:00'
-            }
-          ]
-        },
-        {
-          // 第二个对象是右侧数据
-          listData: [
-            {
-              nums: 100,
-              recTime: '08:00'
-            },
-            {
-              nums: 170,
-              recTime: '09:00'
-            },
-            {
-              nums: 120,
-              recTime: '10:00'
-            },
-            {
-              nums: 270,
-              recTime: '11:00'
-            }
-          ]
-        }
-      ],
+      flowData: {
+        predict: [
+          {
+            nums: 100,
+            rec_time: '08:00'
+          },
+          {
+            nums: 170,
+            rec_time: '09:00'
+          },
+          {
+            nums: 120,
+            rec_time: '10:00'
+          },
+          {
+            nums: 270,
+            rec_time: '11:00'
+          }
+        ],
+        real: [
+          {
+            nums: 100,
+            rec_time: '08:00'
+          },
+          {
+            nums: 170,
+            rec_time: '09:00'
+          },
+          {
+            nums: 120,
+            rec_time: '10:00'
+          },
+          {
+            nums: 270,
+            rec_time: '11:00'
+          }
+        ]
+      },
       menuList: [],
       roadName: '',
       leftXData: [],
@@ -91,7 +85,6 @@ export default {
   mounted () {
     this.getRoads()
     window.addEventListener('resize', debounce(this.resizeEcharts))
-    this.getCenterData()
     if (this.interval) {
       clearInterval(this.interval)
     }
@@ -119,7 +112,6 @@ export default {
     async getCenterData () {
       console.log('预测流量----10分钟更新一次')
       const res = await getCenterData(this.roadName)
-      console.log('预测流量', res)
       if (
         this.leftXData.length > 0 ||
         this.rightXData.length > 0 ||
@@ -131,31 +123,23 @@ export default {
         this.rightXData = []
         this.rightYData = []
       }
-      res.data = this.flowData
+      // res.data = this.flowData
       const leftXData = []
       const leftYData = []
       const rightXData = []
       const rightYData = []
-      res.data.forEach((item, index) => {
-        console.log('item', item)
-        if (index == 0) {
-          // 左侧数据
-          item.listData.forEach(value => {
-            leftXData.push(value.recTime)
-            leftYData.push(value.nums)
-          })
-        } else if (index == 1) {
-          // 右侧数据
-          item.listData.forEach(value => {
-            rightXData.push(value.recTime)
-            rightYData.push(value.nums)
-          })
-        }
-        this.leftXData = leftXData
-        this.leftYData = leftYData
-        this.rightXData = rightXData
-        this.rightYData = rightYData
+      res.data.predict.forEach(item => {
+        leftXData.push(item.rec_time + ':00')
+        leftYData.push(item.nums)
       })
+      res.data.real.forEach(item => {
+        rightXData.push(item.rec_time + ':00')
+        rightYData.push(item.nums)
+      })
+      this.leftXData = leftXData
+      this.leftYData = leftYData
+      this.rightXData = rightXData
+      this.rightYData = rightYData
       // 接口请求完再调用echats
       this.myChartBar.setOption(chartOptionPie(this.leftXData, this.leftYData))
       this.myChartBar2.setOption(
@@ -164,6 +148,7 @@ export default {
     },
     onChooseItem (value) {
       this.roadName = value.label
+      this.getCenterData()
     },
     async getRoads () {
       try {
@@ -184,6 +169,8 @@ export default {
           }
         })
         this.roadName = this.menuList[0].label
+        console.log('路网', this.roadName)
+        this.getCenterData()
       } catch (error) {}
     }
   }

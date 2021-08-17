@@ -88,7 +88,7 @@ export default {
         this.itemData = []
       }
       const res = await getTopRate()
-      console.log('Top', res)
+      // console.log('Top', res)
       // res.data = this.data
       res.data.forEach(item => {
         this.itemData.push({
@@ -96,6 +96,7 @@ export default {
           numsRate: item.numsBlueCar + item.numsYellCar + '辆'
         })
       })
+      // console.log('item', this.itemData)
     }
   }
 }

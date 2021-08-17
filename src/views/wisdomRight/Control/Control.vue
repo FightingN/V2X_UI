@@ -26,36 +26,7 @@ export default {
       roadName: '路网',
       measureData: [],
       headerList: [],
-      data: [
-        {
-          needTodo: '建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        },
-        {
-          needTodo: '建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        },
-        {
-          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        },
-        {
-          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        },
-        {
-          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        },
-        {
-          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        },
-        {
-          needTodo: '垦枢纽_机场互通_杭州方向发生拥堵，建议将限速降低到80km/h',
-          recRoadSectionName: '红垦枢纽_机场互通_杭州方向'
-        }
-      ]
+      data: []
     }
   },
   mounted () {
@@ -68,7 +39,7 @@ export default {
       }
       const res = await getServiceTodo(this.roadName)
       console.log('管控措施', res)
-      res.data = this.data
+      // res.data = this.data
       res.data.forEach(item => {
         this.measureData.push({
           recRoadSectionName: item.recRoadSectionName,

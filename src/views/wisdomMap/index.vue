@@ -56,9 +56,9 @@ export default {
       ]
       var polyline
       this.mapData.forEach(item => {
-        console.log('1', typeof item.flow)
+        // console.log('1', typeof item.flow)
         if (item.flow < 300) {
-          console.log('小于300绿色', item.flow)
+          // console.log('小于300绿色', item.flow)
           polyline = new AMap.Polyline({
             path: item.lnglat,
             isOutline: true,
