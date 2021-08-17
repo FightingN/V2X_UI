@@ -150,6 +150,8 @@ export default {
         // 车流量
         this.carNum.push(item.numsBlueCar + item.numsYellCar)
       })
+      console.log('this.carNum', this.carNum)
+      console.log('this.oxideXdata', this.oxideXdata)
     },
     async getEchartsData () {
       console.log('二级页面指标10秒更新一次')

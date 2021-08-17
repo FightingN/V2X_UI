@@ -45,6 +45,14 @@ export default {
       value1: getData()
     }
   },
+  watch: {
+    oxideXdata: {
+      deep: true,
+      handler: function (newVal, oldVal) {
+        this.myChartBar.setOption(chartOptionPie(this.oxideXdata, this.carNum))
+      }
+    }
+  },
   mounted () {
     window.addEventListener('resize', debounce(this.resizeEcharts))
   },

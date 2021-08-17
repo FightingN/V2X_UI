@@ -80,6 +80,13 @@ export default {
     this.interval = setInterval(() => {
       this.getTopRate()
     }, 1000 * 10)
+    this.$once('hook:beforeDestroy', () => {
+      if (this.interval) {
+        clearInterval(this.interval)
+        this.interval = null
+        console.log('定时器清空')
+      }
+    })
   },
   methods: {
     async getTopRate () {

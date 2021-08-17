@@ -42,6 +42,13 @@ export default {
       this.getCoreData()
       // 10秒更新
     }, 1000 * 10)
+    this.$once('hook:beforeDestroy', () => {
+      if (this.interval) {
+        clearInterval(this.interval)
+        this.interval = null
+        console.log('定时器清空')
+      }
+    })
   },
   methods: {
     ...mapActions({
