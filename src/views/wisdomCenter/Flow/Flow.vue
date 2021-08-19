@@ -129,12 +129,12 @@ export default {
       const rightXData = []
       const rightYData = []
       res.data.predict.forEach(item => {
-        leftXData.push(item.rec_time + ':00')
-        leftYData.push(item.nums)
-      })
-      res.data.real.forEach(item => {
         rightXData.push(item.rec_time + ':00')
         rightYData.push(item.nums)
+      })
+      res.data.real.forEach(item => {
+        leftXData.push(item.rec_time + ':00')
+        leftYData.push(item.nums)
       })
       this.leftXData = leftXData
       this.leftYData = leftYData
