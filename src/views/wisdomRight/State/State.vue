@@ -114,6 +114,22 @@ export default {
     /deep/ .screenTable .table-body .scroll-view .tableContent {
       border: none;
     }
+    /deep/
+      .screenTable
+      .table-body
+      .scroll-view
+      .tableContent
+      div:nth-child(1) {
+      width: 80%;
+    }
+    /deep/
+      .screenTable
+      .table-body
+      .scroll-view
+      .tableContent
+      div:nth-child(2) {
+      color: #dd8933;
+    }
   }
 }
 </style>

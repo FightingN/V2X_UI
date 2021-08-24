@@ -35,8 +35,8 @@ export default {
       // // 氮氧化物排放物
       // data2: 0,
       dataList: [
-        { value: 10, name: '可吸入颗粒排放量' },
-        { value: 20, name: '氮氧化物排放量' }
+        { value: 0, name: '可吸入颗粒排放量' },
+        { value: 0, name: '氮氧化物排放量' }
       ],
       total: 0
     }
@@ -79,6 +79,10 @@ export default {
       console.log('污染物排放----10秒更新')
       this.data1 = this.coreData.inhalableEmissions
       this.data2 = this.coreData.noxEmissions
+      this.dataList = [
+        { value: this.data1, name: '可吸入颗粒排放量' },
+        { value: this.data2, name: '氮氧化物排放量' }
+      ]
       if (this.myChartBar) {
         this.myChartBar.setOption(getAvaChartOption(this.dataList))
         // this.myChartBar.setOption(chartOptionPie(this.data1))

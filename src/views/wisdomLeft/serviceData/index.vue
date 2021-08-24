@@ -117,11 +117,22 @@ export default {
       color: #3c7ca9;
       font-size: 0.2rem;
     }
+    /deep/ .screenTable .header div:nth-child(1) {
+      width: 80%;
+    }
     /deep/ .screenTable .table-body {
       height: 80%;
     }
     /deep/ .screenTable .table-body .scroll-view .tableContent {
       border: none;
+    }
+    /deep/
+      .screenTable
+      .table-body
+      .scroll-view
+      .tableContent
+      div:nth-child(1) {
+      width: 80%;
     }
   }
 }

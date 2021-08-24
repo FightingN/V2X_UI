@@ -87,6 +87,22 @@ export default {
       white-space: pre-wrap !important;
       text-overflow: clip !important;
     }
+    /deep/
+      .screenTable
+      .table-body
+      .scroll-view
+      .tableContent
+      div:nth-child(1) {
+      width: 80%;
+    }
+    /deep/
+      .screenTable
+      .table-body
+      .scroll-view
+      .tableContent
+      div:nth-child(2) {
+      color: #dd8933;
+    }
   }
 }
 </style>

@@ -26,6 +26,7 @@ export function chartOptionPie(bacData) {
       {
         name: 'C',
         type: 'pie',
+        avoidLabelOverlap: true,
         startAngle: 0,
         hoverAnimation: false,
         radius: ['60%', '87%'],
@@ -224,7 +225,7 @@ export function getAvaChartOption(data = []) {
     {
       type: 'pie',
       radius: ['45%', '50%'],
-      center: ['50%', '35%'],
+      center: ['50%', '40%'],
       hoverAnimation: false,
       itemStyle: {
         normal: {
@@ -249,10 +250,12 @@ export function getAvaChartOption(data = []) {
     },
     {
       name: '排放量',
+      minAngle: 10,
       type: 'pie',
+      avoidLabelOverlap: true,
       clockWise: false,
       radius: ['55%', '68%'],
-      center: ['50%', '35%'],
+      center: ['50%', '40%'],
       hoverAnimation: false,
       itemStyle: {
         normal: {
@@ -290,7 +293,7 @@ export function getAvaChartOption(data = []) {
           },
           labelLine: {
             length: 0,
-            length2: 70,
+            length2: 50,
             show: true,
             color: '#00ffff'
           }
@@ -304,7 +307,7 @@ export function getAvaChartOption(data = []) {
     title: {
       text: total,
       subtext: '总数',
-      top: '20%',
+      top: '30%',
       left: '49%',
       textAlign: 'center',
       textStyle: {
