@@ -10,12 +10,12 @@ export function chartOptionPie(data) {
     } else if (index == 1) {
       dataLine.push({
         name: '车辆平均速度',
-        value: 927
+        value: item
       })
     } else if (index == 2) {
       dataLine.push({
         name: '大车混入率',
-        value: 1260
+        value: item
       })
     }
   })

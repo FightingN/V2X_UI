@@ -1,6 +1,7 @@
 <template>
   <div class="wisdom-header">
-    <div>V2X SERVER管理系统交通仿真模块</div>
+    <!-- <div>V2X SERVER管理系统交通仿真模块</div> -->
+    <div>沪杭甬智慧高速数字孪生实时在线管理系统</div>
     <div class="navgation" @click="navgationTo">后台</div>
   </div>
 </template>

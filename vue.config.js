@@ -13,6 +13,7 @@ module.exports = {
       .set('utils', join('src/utils'))
       .set('api', join('src/api'))
       .set('components', join('src/components'))
+      .set('assets', join('src/assets'))
   },
   // 调整 webpack 配置
   configureWebpack: config => {
@@ -24,7 +25,8 @@ module.exports = {
   devServer: {
     proxy: {
       '/api': {
-        target: 'http://127.0.0.1:7001/', // 代理到的后端服务器地址
+        // target: 'http://127.0.0.1:7001/', // 代理到的后端服务器地址
+        target: 'http://39.105.172.133:9999', // 代理到的后端服务器地址
         changeOrigin: true,
         ws: true,
         pathRewrite: {

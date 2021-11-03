@@ -11,6 +11,8 @@ import wisdomLeft from './wisdomLeft'
 import wisdomRight from './wisdomRight'
 import wisdomCenter from './wisdomCenter'
 import wisdomMap from './wisdomMap'
+// import wisdomMap from './wisdomMap/indexCool'
+// import wisdomMap from './wisdomMap/indexMarker'
 export default {
   data () {
     return {
