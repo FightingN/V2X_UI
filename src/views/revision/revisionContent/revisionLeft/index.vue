@@ -1,10 +1,16 @@
 <template>
-  <div class="revision-left">左边</div>
+  <div class="revision-left">
+    <traffic-flow></traffic-flow>
+  </div>
 </template>
 
 <script>
+import TrafficFlow from './trafficFlow'
 export default {
   name: 'revision-left',
+  components: {
+    TrafficFlow
+  },
   data () {
     return {}
   },
