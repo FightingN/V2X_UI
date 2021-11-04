@@ -3,6 +3,13 @@
   padding: 0;
 }
 
+html,
+body {
+  height: 100%;
+  background: url('../assets/revision/box-bac.png');
+  background-size: 100% 100%;
+}
+
 .border {
   border: 1px solid #4c5c9a;
 }
@@ -18,4 +25,32 @@
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+@font-face {
+  font-family: 'PingFang Regular';
+  src: url('../assets/fonts/PingFang Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PingFang Simple Thin';
+  src: url('../assets/fonts/pingfang-simple-thin.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PingFang Simple Bold';
+  src: url('../assets/fonts/pingfang-simple-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Source Han Sans CN';
+  src: url('../assets/fonts/SourceHanSansCNRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }

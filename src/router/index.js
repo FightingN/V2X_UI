@@ -4,10 +4,16 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
+  // {
+  //   path: '/',
+  //   name: 'index',
+  //   component: () => import(/* webpackChunkName: 'index' */ 'views/index.vue')
+  // },
   {
     path: '/',
     name: 'index',
-    component: () => import(/* webpackChunkName: 'index' */ 'views/index.vue')
+    component: () =>
+      import(/* webpackChunkName: 'index' */ 'views/revision/index.vue')
   },
   {
     path: '/searchDeatil',
