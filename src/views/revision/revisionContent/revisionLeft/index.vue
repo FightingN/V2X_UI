@@ -1,15 +1,24 @@
 <template>
   <div class="revision-left">
     <traffic-flow></traffic-flow>
+    <service-level></service-level>
+    <level-appraise></level-appraise>
+    <pollutant-emission></pollutant-emission>
   </div>
 </template>
 
 <script>
 import TrafficFlow from './trafficFlow'
+import serviceLevel from './serviceLevel'
+import levelAppraise from './levelAppraise'
+import pollutantEmission from './pollutantEmission'
 export default {
   name: 'revision-left',
   components: {
-    TrafficFlow
+    TrafficFlow,
+    serviceLevel,
+    levelAppraise,
+    pollutantEmission
   },
   data () {
     return {}
