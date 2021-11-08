@@ -12,7 +12,10 @@
 <script>
 import revisionLeft from './revisionLeft'
 import revisionRight from './revisionRight'
-import revisionMap from './revisionMap'
+// 1.4.15的地图
+// import revisionMap from './revisionMap'
+// Local 2.0的地图
+import revisionMap from './revisionMap/localIndex.vue'
 import revisionCenterBottom from './revisionCenterBottom'
 export default {
   name: 'revision-content',
